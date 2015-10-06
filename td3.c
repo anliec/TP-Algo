@@ -78,14 +78,15 @@ void InsertValue(BinaryHeap * heap, int value)
 
 int ExtractMax(BinaryHeap * heap, int *res)
 {
-  if(heap->allocated > 0)
+  if(heap->filled > 0)
   {
     *res = heap->array[0];
-    return 0;
+
+    return 1;
   }
   else
   {
-    return 100; //error code: the array is empty
+    return 0; //error code: the array is empty
   }
 }
 
@@ -100,3 +101,42 @@ void swap(BinaryHeap * heap,const unsigned int posA,const unsigned int posB)
   heap->array[posA] = heap->array[posB];
   heap->array[posB] = temp;
 }
+
+void cutHead(BinaryHeap * heap)
+{
+  int currantPos = 0;
+  while(currantPos = putTheBiggerUp(heap,currantPos) != -1)
+  {
+
+  }
+}
+
+int putTheBiggerUp(BinaryHeap * heap, int posFather)
+{
+  int fils1 = posFather*2+1, fils2 = posFather*2+2;
+  if(fils1 >= heap->filled)
+  {
+    return -1;
+  }
+  else if(fils2 >= heap->filled)
+  {
+    swap(heap,posFather,fils1);
+    return -1;
+  }
+  else
+  {
+    if(heap->array[fils1] > heap->array[fils2])
+    {
+      swap(heap,posFather,fils1);
+      return fils1;
+    }
+    else
+    {
+      swap(heap,posFather,fils2);
+      return fils2;
+    }
+  }
+}
+
+
+
