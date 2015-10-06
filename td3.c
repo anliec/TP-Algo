@@ -72,6 +72,7 @@ void InsertValue(BinaryHeap * heap, int value)
   while (value > heap->array[(i-1)/2])
   {
     swap(heap, i, (i - 1) / 2);
+    i = (i-1)/2;
   }
 }
 
