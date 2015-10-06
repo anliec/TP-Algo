@@ -30,6 +30,11 @@ int ExtractMax(BinaryHeap * heap, int * val);
 /* Destroy frees the structure and the array */
 void Destroy(BinaryHeap * heap);
 
+void swap(BinaryHeap * heap,const unsigned int posA,const unsigned int posB);
+
+void cutHead(BinaryHeap * heap);
+
+int putTheBiggerUp(BinaryHeap * heap, int posFather);
 
 int main(void) 
 {
@@ -58,15 +63,16 @@ int main(void)
 
 BinaryHeap * Init(int size)
 {
-  BinaryHeap * heap;
+  BinaryHeap * heap = malloc(sizeof(BinaryHeap));
   heap->allocated = size;
   heap->filled = 0;
-  heap->array = malloc(sizeof(int)*heap->allocated);
+  heap->array = malloc(sizeof(int)*size);
   return heap;
 }
 
 void InsertValue(BinaryHeap * heap, int value)
 {
+  heap->filled++;
   heap->array[heap->filled] = value;
   int i = heap->filled;
   while (value > heap->array[(i-1)/2])
@@ -82,10 +88,12 @@ int ExtractMax(BinaryHeap * heap, int *res)
   {
     *res = heap->array[0];
     cutHead(heap);
+    heap->filled--;
     return 1;
   }
   else
   {
+    printf("heap->filled > 0\n");
     return 0; //error code: the array is empty
   }
 }
@@ -93,6 +101,7 @@ int ExtractMax(BinaryHeap * heap, int *res)
 void Destroy(BinaryHeap * heap)
 {
   free(heap->array);
+  //free(heap);
 }
 
 void swap(BinaryHeap * heap,const unsigned int posA,const unsigned int posB)
@@ -109,6 +118,19 @@ void cutHead(BinaryHeap * heap)
   {
 
   }
+  BinaryHeap * heapBis;
+  heapBis = Init(10);
+  int i=0;
+  for(i=0 ; i<heap->filled ; i++)
+  {
+    if(i != currantPos)
+    {
+      InsertValue(heapBis,heap->array[i]);
+      printf("val added\n");
+    }
+  }
+  Destroy(heap);
+  heap = heapBis;
 }
 
 int putTheBiggerUp(BinaryHeap * heap, int posFather)
