@@ -67,7 +67,12 @@ BinaryHeap * Init(int size)
 
 void InsertValue(BinaryHeap * heap, int value)
 {
-  /* put your insert code here */
+  heap->array[heap->filled] = value;
+  int i = heap->filled;
+  while (value > heap->array[(i-1)/2])
+  {
+    swap(heap, i, (i - 1) / 2);
+  }
 }
 
 int ExtractMax(BinaryHeap * heap, int *res)
@@ -85,7 +90,7 @@ int ExtractMax(BinaryHeap * heap, int *res)
 
 void Destroy(BinaryHeap * heap)
 {
-  /* put your destruction code here */
+  free(heap->array);
 }
 
 void swap(BinaryHeap * heap,const unsigned int posA,const unsigned int posB)
