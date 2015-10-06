@@ -70,23 +70,48 @@ BinaryHeap * Init(int size)
   BinaryHeap * heap = malloc(sizeof(BinaryHeap));
   heap->allocated = size;
   heap->filled = 0;
-  heap->array = malloc(sizeof(int)*size);
+  heap->array = malloc(sizeof(int[size]));
   return heap;
 }
 
-void InsertValue(BinaryHeap * heap, int value)
+/*void InsertValue(BinaryHeap * heap, int value)
 {
+  if(heap->filled == heap->allocated)
+  {
+    //augmentation de la taille allouée
+    heap->allocated++;
+    heap->array = realloc(heap->array, sizeof(int[heap->allocated]));
+  }
   heap->filled++;
   heap->array[heap->filled] = value;
   int i = heap->filled;
-  while (value > heap->array[(i-1)/2])
+  while (i != 0 && value > heap->array[(i-1)/2])
   {
     swap(heap, i, (i - 1) / 2);
     i = (i-1)/2;
   }
-}
+}*/
+void InsertValue(BinaryHeap * heap, int value) ///Code de Paul Louis
+{
+  if(heap->filled == heap->allocated)
+  {
+    heap->allocated++;
+    heap->array = realloc(heap->array, sizeof(int[heap->allocated]));
+  }
 
-int ExtractMax(BinaryHeap * heap, int *res)
+  /* put your insert code here */
+  int index = heap->filled;
+  heap->array[index] = value;
+  heap->filled++;
+
+  while(index!=0 && heap->array[index]>heap->array[(index-1)/2]) {
+    heap->array[index] = heap->array[(index-1)/2];
+    heap->array[(index-1)/2] = value;
+    index = (index-1)/2;
+  }
+
+}
+/*int ExtractMax(BinaryHeap * heap, int *res)
 {
   if(heap->filled > 0)
   {
@@ -99,6 +124,32 @@ int ExtractMax(BinaryHeap * heap, int *res)
     printf("heap->filled <= 0\n");
     return 0; //error code: the array is empty
   }
+}*/
+int ExtractMax(BinaryHeap * heap, int *res)  ///Code de paul Louis
+{
+  if(heap->filled>0) {
+    int value = heap->array[0];
+    *res = value;
+
+
+    int index = 0;
+    while(index*2+2 < heap->filled)
+    {
+      if(heap->array[index*2+1]>heap->array[index*2+2]) {
+        heap->array[index] = heap->array[index*2+1];
+        index=index*2+1;
+      } else {
+        heap->array[index] = heap->array[index*2+2];
+        index=index*2+2;
+      }
+    }
+    heap->array[index] =  heap->array[heap->filled-1];
+    heap->array[heap->filled-1] = 0;
+    heap->filled--;
+
+    return 1;
+  }
+  return 0;
 }
 
 void Destroy(BinaryHeap * heap)
