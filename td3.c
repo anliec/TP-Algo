@@ -80,7 +80,7 @@ int ExtractMax(BinaryHeap * heap, int *res)
   if(heap->filled > 0)
   {
     *res = heap->array[0];
-
+    cutHead(heap);
     return 1;
   }
   else
