@@ -36,6 +36,8 @@ void cutHead(BinaryHeap * heap);
 
 int putTheBiggerUp(BinaryHeap * heap, int posFather);
 
+void printTab(BinaryHeap * heap);
+
 int main(void) 
 {
   char lecture[100];
@@ -54,6 +56,8 @@ int main(void)
       {
         printf("%d\r\n",val);
       }
+    } else if (strcmp(lecture,"print")==0) {
+      printTab(heap);
     }
     fscanf(stdin,"%99s",lecture);
   }
@@ -88,12 +92,11 @@ int ExtractMax(BinaryHeap * heap, int *res)
   {
     *res = heap->array[0];
     cutHead(heap);
-    heap->filled--;
     return 1;
   }
   else
   {
-    printf("heap->filled > 0\n");
+    printf("heap->filled <= 0\n");
     return 0; //error code: the array is empty
   }
 }
@@ -101,7 +104,7 @@ int ExtractMax(BinaryHeap * heap, int *res)
 void Destroy(BinaryHeap * heap)
 {
   free(heap->array);
-  //free(heap);
+  free(heap);
 }
 
 void swap(BinaryHeap * heap,const unsigned int posA,const unsigned int posB)
@@ -113,24 +116,13 @@ void swap(BinaryHeap * heap,const unsigned int posA,const unsigned int posB)
 
 void cutHead(BinaryHeap * heap)
 {
+  swap(heap, 0, heap->filled-1);
+  heap->filled--;
   int currantPos = 0;
-  while(currantPos = putTheBiggerUp(heap,currantPos) != -1)
+  while ( currantPos != -1)
   {
-
+    currantPos = putTheBiggerUp(heap,currantPos);
   }
-  BinaryHeap * heapBis;
-  heapBis = Init(10);
-  int i=0;
-  for(i=0 ; i<heap->filled ; i++)
-  {
-    if(i != currantPos)
-    {
-      InsertValue(heapBis,heap->array[i]);
-      printf("val added\n");
-    }
-  }
-  Destroy(heap);
-  heap = heapBis;
 }
 
 int putTheBiggerUp(BinaryHeap * heap, int posFather)
@@ -158,6 +150,16 @@ int putTheBiggerUp(BinaryHeap * heap, int posFather)
       return fils2;
     }
   }
+}
+
+void printTab(BinaryHeap * heap)
+{
+  int i;
+  for (i = 0; i < heap->filled; i++)
+  {
+    printf(" %d",heap->array[i]);
+  }
+  printf("\n");
 }
 
 
