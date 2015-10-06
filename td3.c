@@ -59,7 +59,9 @@ int main(void)
 BinaryHeap * Init(int size)
 {
   BinaryHeap * heap;
-  /* put your init code here */
+  heap->allocated = size;
+  heap->filled = 0;
+  heap->array = malloc(sizeof(int)*heap->allocated);
   return heap;
 }
 
