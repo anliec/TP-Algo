@@ -72,8 +72,15 @@ void InsertValue(BinaryHeap * heap, int value)
 
 int ExtractMax(BinaryHeap * heap, int *res)
 {
-  /* put your extraction code here */
-  return 0;
+  if(heap->allocated > 0)
+  {
+    *res = heap->array[0];
+    return 0;
+  }
+  else
+  {
+    return 100; //error code: the array is empty
+  }
 }
 
 void Destroy(BinaryHeap * heap)
@@ -81,3 +88,9 @@ void Destroy(BinaryHeap * heap)
   /* put your destruction code here */
 }
 
+void swap(BinaryHeap * heap,const unsigned int posA,const unsigned int posB)
+{
+  int temp = heap->array[posA];
+  heap->array[posA] = heap->array[posB];
+  heap->array[posB] = temp;
+}
