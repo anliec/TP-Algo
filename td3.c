@@ -78,7 +78,7 @@ BinaryHeap * Init(int size)
 {
   if(heap->filled == heap->allocated)
   {
-    //augmentation de la taille allouée
+    //augmentation de la taille allouï¿½e
     heap->allocated++;
     heap->array = realloc(heap->array, sizeof(int[heap->allocated]));
   }
@@ -99,7 +99,6 @@ void InsertValue(BinaryHeap * heap, int value) ///Code de Paul Louis
     heap->array = realloc(heap->array, sizeof(int[heap->allocated]));
   }
 
-  /* put your insert code here */
   int index = heap->filled;
   heap->array[index] = value;
   heap->filled++;
@@ -111,7 +110,7 @@ void InsertValue(BinaryHeap * heap, int value) ///Code de Paul Louis
   }
 
 }
-/*int ExtractMax(BinaryHeap * heap, int *res)
+int ExtractMax(BinaryHeap * heap, int *res)
 {
   if(heap->filled > 0)
   {
@@ -124,8 +123,8 @@ void InsertValue(BinaryHeap * heap, int value) ///Code de Paul Louis
     printf("heap->filled <= 0\n");
     return 0; //error code: the array is empty
   }
-}*/
-int ExtractMax(BinaryHeap * heap, int *res)  ///Code de paul Louis
+}
+/*int ExtractMax(BinaryHeap * heap, int *res)  ///Code de paul Louis
 {
   if(heap->filled>0) {
     int value = heap->array[0];
@@ -150,7 +149,7 @@ int ExtractMax(BinaryHeap * heap, int *res)  ///Code de paul Louis
     return 1;
   }
   return 0;
-}
+}*/
 
 void Destroy(BinaryHeap * heap)
 {
@@ -178,13 +177,21 @@ void cutHead(BinaryHeap * heap)
 
 int putTheBiggerUp(BinaryHeap * heap, int posFather)
 {
-  int fils1 = posFather*2+1, fils2 = posFather*2+2;
-  if(fils1 >= heap->filled)
+  //printTab(heap);
+  const unsigned int fils1 = posFather*2+1, fils2 = posFather*2+2;
+  if(heap->array[posFather] > heap->array[fils1] && heap->array[posFather] > heap->array[fils2])
   {
+    //printf("father is bigger end\n");
+    return -1;
+  }
+  else if(fils1 >= heap->filled)
+  {
+    //printf("end\n");
     return -1;
   }
   else if(fils2 >= heap->filled)
   {
+    //printf("swap de %d avec %d plutot que %d filled: %d end\n",posFather,fils1,fils2, heap->filled);
     swap(heap,posFather,fils1);
     return -1;
   }
@@ -192,11 +199,13 @@ int putTheBiggerUp(BinaryHeap * heap, int posFather)
   {
     if(heap->array[fils1] > heap->array[fils2])
     {
+      //printf("swap de %d avec %d plutot que %d filled: %d cas1\n",posFather,fils1,fils2, heap->filled);
       swap(heap,posFather,fils1);
       return fils1;
     }
     else
     {
+      //printf("swap de %d avec %d plutot que %d filled: %d cas2\n",posFather,fils2,fils1, heap->filled);
       swap(heap,posFather,fils2);
       return fils2;
     }
