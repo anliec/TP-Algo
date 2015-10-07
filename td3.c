@@ -179,7 +179,11 @@ int putTheBiggerUp(BinaryHeap * heap, int posFather)
 {
   //printTab(heap);
   const unsigned int fils1 = posFather*2+1, fils2 = posFather*2+2;
-  if(heap->array[posFather] > heap->array[fils1] && heap->array[posFather] > heap->array[fils2])
+  if(posFather >= heap->allocated || fils1>= heap->allocated)
+  {
+    return -1;
+  }
+  else if(fils2 < heap->filled && heap->array[posFather] > heap->array[fils1] && heap->array[posFather] > heap->array[fils2])
   {
     //printf("father is bigger end\n");
     return -1;
@@ -192,7 +196,10 @@ int putTheBiggerUp(BinaryHeap * heap, int posFather)
   else if(fils2 >= heap->filled)
   {
     //printf("swap de %d avec %d plutot que %d filled: %d end\n",posFather,fils1,fils2, heap->filled);
-    swap(heap,posFather,fils1);
+    if(heap->array[posFather] < heap->array[fils1])
+    {
+      swap(heap, posFather, fils1);
+    }
     return -1;
   }
   else
