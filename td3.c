@@ -74,7 +74,7 @@ BinaryHeap * Init(int size)
   return heap;
 }
 
-/*void InsertValue(BinaryHeap * heap, int value)
+void InsertValue(BinaryHeap * heap, int value)
 {
   if(heap->filled == heap->allocated)
   {
@@ -82,16 +82,17 @@ BinaryHeap * Init(int size)
     heap->allocated++;
     heap->array = realloc(heap->array, sizeof(int[heap->allocated]));
   }
-  heap->filled++;
   heap->array[heap->filled] = value;
   int i = heap->filled;
+  heap->filled++;
+
   while (i != 0 && value > heap->array[(i-1)/2])
   {
     swap(heap, i, (i - 1) / 2);
     i = (i-1)/2;
   }
-}*/
-void InsertValue(BinaryHeap * heap, int value) ///Code de Paul Louis
+}
+/*void InsertValue(BinaryHeap * heap, int value) ///Code de Paul Louis
 {
   if(heap->filled == heap->allocated)
   {
@@ -109,7 +110,7 @@ void InsertValue(BinaryHeap * heap, int value) ///Code de Paul Louis
     index = (index-1)/2;
   }
 
-}
+}*/
 int ExtractMax(BinaryHeap * heap, int *res)
 {
   if(heap->filled > 0)
@@ -120,7 +121,6 @@ int ExtractMax(BinaryHeap * heap, int *res)
   }
   else
   {
-    printf("heap->filled <= 0\n");
     return 0; //error code: the array is empty
   }
 }
