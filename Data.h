@@ -6,8 +6,21 @@
 #define TP_ALGO_DATA_H
 
 
-class Data {
+class Data
+{
+public:
+    Data(int &id,char &year,char &month,char &dayNumber,char &hours,char &min,char &weekDay,char &trafic);
 
+
+private:
+    int m_id;
+    char m_year;
+    char m_month;
+    char m_dayNumber;
+    char m_hours;
+    char m_min;
+    char m_weekDay;
+    char m_trafic;
 };
 
 
