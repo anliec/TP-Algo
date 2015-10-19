@@ -11,6 +11,16 @@ typedef unsigned char uchar;
 class Data
 {
 public:
+    //getters:
+    usint getId() const;
+    uchar getYear() const;
+    uchar getMonth() const;
+    uchar getDayNumber() const;
+    uchar getHours() const;
+    uchar getMin() const;
+    uchar getWeekDay() const;
+    uchar getTrafic() const;
+
     Data(usint &id,uchar &year,uchar &month,uchar &dayNumber,uchar &hours,uchar &min,uchar &weekDay,uchar &trafic);
 
 private:

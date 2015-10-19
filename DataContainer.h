@@ -29,7 +29,10 @@ public:
     int add(Data newData);
 
     //reads a value
-    Data at(int index) const;
+    Data & at(int index) const;
+
+    //get last index
+    unsigned int endingIndex() const;
 
     //Constructor
     DataContainer(unsigned int capacity = DEFAULT_CONTAINER_SIZE);

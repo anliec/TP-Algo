@@ -10,3 +10,35 @@ Data::Data(usint &id,uchar &year,uchar &month,uchar &dayNumber,uchar &hours,ucha
 {
 
 }
+
+usint Data::getId() const {
+    return m_id;
+}
+
+uchar Data::getYear() const {
+    return m_year;
+}
+
+uchar Data::getMonth() const {
+    return m_month;
+}
+
+uchar Data::getDayNumber() const {
+    return m_dayNumber;
+}
+
+uchar Data::getHours() const {
+    return m_hours;
+}
+
+uchar Data::getMin() const {
+    return m_min;
+}
+
+uchar Data::getWeekDay() const {
+    return m_weekDay;
+}
+
+uchar Data::getTrafic() const {
+    return m_trafic;
+}

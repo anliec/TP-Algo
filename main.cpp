@@ -1,10 +1,13 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include "DataHandler.h"
 #include "Data.h"
 
 int main()
 {
+    DataHandler handler;
+
     bool loop=true;
     std::string entry;
     while(loop)
@@ -15,7 +18,7 @@ int main()
             usint id;
             uchar year, month, day, hours, min, weekDay, trafic;
             std::cin >> year >> month >> day >> hours >> min >> weekDay >> trafic;
-
+            handler.addData(Data(id,year,month,day,hours,min,weekDay,trafic));
         }
         else if(entry.substr(0,7).compare("STATS_C")==0)
         {
