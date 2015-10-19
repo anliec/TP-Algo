@@ -22,7 +22,7 @@ int DataContainer::add(Data newData)
 Data DataContainer::at(int index) const
 {
     return m_tab[index];
-}
+}//End of method "at"
 
 DataContainer::DataContainer(unsigned int capacity) : m_capacity(capacity)
 {
@@ -35,11 +35,11 @@ DataContainer::DataContainer(unsigned int capacity) : m_capacity(capacity)
 
 DataContainer::~DataContainer()
 {
-    #ifdef MAP
-        cout << "Destructor of DataContainer called" << endl;
-    #endif
+#ifdef MAP
+    cout << "Destructor of DataContainer called" << endl;
+#endif
     delete [] m_tab;
-}
+}//End of destructor
 
 int DataContainer::adjust(unsigned int newCapacity)
 {
@@ -60,4 +60,4 @@ int DataContainer::adjust(unsigned int newCapacity)
     }
     delete [] ansTab;
     return 0;
-}
+}//End of method "adjust"
