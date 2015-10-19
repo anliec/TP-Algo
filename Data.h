@@ -5,22 +5,23 @@
 #ifndef TP_ALGO_DATA_H
 #define TP_ALGO_DATA_H
 
+typedef unsigned short int usint;
+typedef unsigned char uchar;
 
 class Data
 {
 public:
-    Data(int &id,char &year,char &month,char &dayNumber,char &hours,char &min,char &weekDay,char &trafic);
-
+    Data(usint &id,uchar &year,uchar &month,uchar &dayNumber,uchar &hours,uchar &min,uchar &weekDay,uchar &trafic);
 
 private:
-    int m_id;
-    char m_year;
-    char m_month;
-    char m_dayNumber;
-    char m_hours;
-    char m_min;
-    char m_weekDay;
-    char m_trafic;
+    usint m_id;
+    uchar m_year;
+    uchar m_month;
+    uchar m_dayNumber;
+    uchar m_hours;
+    uchar m_min;
+    uchar m_weekDay;
+    uchar m_trafic;
 };
 
 
