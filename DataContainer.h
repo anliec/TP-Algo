@@ -11,8 +11,10 @@
 
 #include "Data.h"
 
+
 //Constants
 const int DEFAULT_CONTAINER_SIZE = 78125;
+
 
 //------------------------------------------------------------------------
 // what is this class useful for ?
@@ -26,14 +28,19 @@ public:
     //adds a value
     int add(Data newData);
 
+    //reads a value
+    Data at(int index) const;
+
     //Constructor
     DataContainer(unsigned int capacity = DEFAULT_CONTAINER_SIZE);
 
     //Destructor
     virtual ~DataContainer ( );
 
+
 //Private methods
 private:
+    //Adjusts the capacity of the container
     int adjust(unsigned int newCapacity = 2*m_capacity);
 
 

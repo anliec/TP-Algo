@@ -19,6 +19,11 @@ int DataContainer::add(Data newData)
     return 0;
 }//End of method "add"
 
+Data DataContainer::at(int index) const
+{
+    return m_tab[index];
+}
+
 DataContainer::DataContainer(unsigned int capacity) : m_capacity(capacity)
 {
     m_used = 0;

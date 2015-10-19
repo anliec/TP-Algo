@@ -1,21 +1,19 @@
 /*************************************************************************
-                           DataHandler  -  description
+                           DataPointerContainer  -  description
                              -------------------
     begin                : 19/10/2015
     copyright            : (C) 2015 by Edern Haumont & Nicolas Six
 *************************************************************************/
 
-//---------- Interface of the class DataHandler (file DataHandler.h) ------
-#ifndef TP_ALGO_DATAHANDLER_H
-#define TP_ALGO_DATAHANDLER_H
-
-#include "DataContainer.h"
+//---------- Interface of the class DataPointerContainer (file DataPointerContainer.h) ------
+#ifndef TP_ALGO_DATAPOINTERCONTAINER_H
+#define TP_ALGO_DATAPOINTERCONTAINER_H
 
 //------------------------------------------------------------------------
 // what is this class useful for ?
 //
 //------------------------------------------------------------------------
-class DataHandler {
+class DataPointerContainer {
 
 //Public methods
 public:
@@ -27,9 +25,8 @@ private:
 
 //Private attributes
 private:
-    DataContainer container;
 
-}; //class DataHandler
+};
 
 
-#endif //TP_ALGO_DATAHANDLER_H
+#endif //TP_ALGO_DATAPOINTERCONTAINER_H
