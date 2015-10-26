@@ -5,6 +5,10 @@
 #ifndef TP_ALGO_DATA_H
 #define TP_ALGO_DATA_H
 
+
+//Constants
+const int DEFAULT_CONTAINER_SIZE = 78125;
+
 typedef unsigned short int usint;
 typedef unsigned char uchar;
 

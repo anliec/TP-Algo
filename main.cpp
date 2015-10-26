@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <stdlib.h>
 #include "DataHandler.h"
 #include "Data.h"
 
@@ -13,6 +14,7 @@ int main()
     while(loop)
     {
         std::cin >> entry;
+        std::cout << entry;
         if(entry.substr(0,3).compare("ADD")==0)
         {
             usint id;

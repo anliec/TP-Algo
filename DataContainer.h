@@ -12,10 +12,6 @@
 #include "Data.h"
 
 
-//Constants
-const int DEFAULT_CONTAINER_SIZE = 78125;
-
-
 //------------------------------------------------------------------------
 // what is this class useful for ?
 //
@@ -44,7 +40,8 @@ public:
 //Private methods
 private:
     //Adjusts the capacity of the container
-    int adjust(unsigned int newCapacity = 2*m_capacity);
+    int adjust(unsigned int newCapacity);
+    int adjust() {return adjust(2*m_capacity);}
 
 
 //Private attributes

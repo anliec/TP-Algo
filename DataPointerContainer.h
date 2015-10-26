@@ -9,9 +9,6 @@
 #ifndef TP_ALGO_DATAPOINTERCONTAINER_H
 #define TP_ALGO_DATAPOINTERCONTAINER_H
 
-//Constants
-const int DEFAULT_CONTAINER_SIZE = 78125;
-
 #include "Data.h"
 
 //------------------------------------------------------------------------
@@ -39,7 +36,8 @@ public:
 //Private methods
 private:
     //Adjusts the capacity of the container
-    int adjust(unsigned int newCapacity = 2*m_capacity);
+    int adjust(unsigned int newCapacity);
+    int adjust() {return adjust(2*m_capacity);}
 
 
 //Private attributes
