@@ -24,6 +24,11 @@ Data* DataPointerContainer::at(int index) const
     return m_tab[index];
 }//End of method "at"
 
+unsigned int DataPointerContainer::endingIndex() const
+{
+    return m_used-1;
+}
+
 DataPointerContainer::DataPointerContainer(unsigned int capacity) : m_capacity(capacity)
 {
     m_used = 0;

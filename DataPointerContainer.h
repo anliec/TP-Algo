@@ -26,6 +26,9 @@ public:
     //reads a value
     Data* at(int index) const;
 
+    //get last index
+    unsigned int endingIndex() const;
+
     //Constructor
     DataPointerContainer(unsigned int capacity = DEFAULT_CONTAINER_SIZE);
 
