@@ -17,25 +17,26 @@ class Data
 public:
     //getters:
     usint getId() const;
-    uchar getYear() const;
+    usint getYear() const;
     uchar getMonth() const;
     uchar getDayNumber() const;
     uchar getHours() const;
     uchar getMin() const;
     uchar getWeekDay() const;
-    uchar getTrafic() const;
+    char getTrafic() const;
 
-    Data(usint &id,uchar &year,uchar &month,uchar &dayNumber,uchar &hours,uchar &min,uchar &weekDay,uchar &trafic);
+    Data(usint &id,usint &year,uchar &month,uchar &dayNumber,uchar &hours,uchar &min,uchar &weekDay,char &trafic);
+    Data();
 
 private:
     usint m_id;
-    uchar m_year;
+    usint m_year;
     uchar m_month;
     uchar m_dayNumber;
     uchar m_hours;
     uchar m_min;
     uchar m_weekDay;
-    uchar m_trafic;
+    char m_trafic;
 };
 
 

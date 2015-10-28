@@ -13,13 +13,17 @@ int main()
     while(loop)
     {
         std::cin >> entry;
-        std::cout << entry;
+        //std::cout << entry;
         if(entry.substr(0,3).compare("ADD")==0)
         {
-            usint id;
-            uchar year, month, day, hours, min, weekDay, trafic;
-            std::cin >> year >> month >> day >> hours >> min >> weekDay >> trafic;
-            handler.addData(Data(id,year,month,day,hours,min,weekDay,trafic));
+            usint id, year;
+            usint month, day, hours, min, weekDay;
+            char trafic;
+            //get the values from cin into integer:
+            std::cin >> id >> year >> month >> day >> hours >> min >> weekDay >> trafic;
+            //translate the value into uchar:
+            uchar c_month = month, c_day = day, c_hours = hours, c_min = min, c_weekDay = weekDay;
+            handler.addData(Data(id,year,c_month,c_day,c_hours,c_min,c_weekDay,trafic));
         }
         else if(entry.substr(0,7).compare("STATS_C")==0)
         {
@@ -29,14 +33,16 @@ int main()
         }
         else if(entry.substr(0,6).compare("JAM_DH")==0)
         {
-            uchar weekDay;
+            usint weekDay;
             std::cin >> weekDay;
+            uchar c_weekday = weekDay;
 
         }
         else if(entry.substr(0,8).compare("STATS_D7")==0)
         {
-            uchar weekDay;
+            usint weekDay;
             std::cin >> weekDay;
+            uchar c_weekday = weekDay;
 
         }
         else if(entry.substr(0,3).compare("OPT")==0)
