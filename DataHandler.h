@@ -29,6 +29,7 @@ public:
     int addData(const Data &data);
     int sensorStats(usint id);
     int jamStats(uchar day7);
+    int dayStats(uchar day7);
 
     DataHandler();
     ~DataHandler();
