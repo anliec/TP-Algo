@@ -4,7 +4,7 @@
 #include "DataHandler.h"
 #include "Data.h"
 
-/*int main()
+int main()
 {
     DataHandler handler;
 
@@ -55,7 +55,7 @@
         }
     }
     return 0;
-}*/
+}
 
 //new version//
 
@@ -67,38 +67,9 @@ int daysAndMin[NUMBER_OF_DAYS][NUMBER_OF_MINUTES][NUMBER_OF_COLORS];
 int addData(int sensorId,uchar color);
 int sensorStats(int id);
 int dayStats(int day7);
-*/
+
 int main()
 {
-    for(int i = 0; i<NUMBER_OF_SENSORS; i++)
-    {
-        for(int j = 0; j<NUMBER_OF_COLORS; j++)
-        {
-            sensors[i][j] = 0;
-        }
-    }
-
-    for(int i = 0; i<NUMBER_OF_DAYS; i++)
-    {
-        for(int j = 0; j<NUMBER_OF_COLORS; j++)
-        {
-            days[i][j] = 0;
-        }
-    }
-
-
-    for(int i = 0; i<NUMBER_OF_DAYS; i++)
-    {
-        for(int j = 0; j<NUMBER_OF_MINUTES; j++)
-        {
-            for(int k = 0; k<NUMBER_OF_MINUTES; k++)
-            {
-                daysAndMin[i][j][k]=0;
-            }
-        }
-    }
-
-
     bool loop=true;
     std::string entry;
     while(loop)
@@ -168,5 +139,5 @@ int addData(int sensorId,uchar color)
     }
     return 0;
 }
-
+*/
 //end of new version//

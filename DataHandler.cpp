@@ -24,7 +24,7 @@ DataHandler::DataHandler()
     {
         for(int j = 0; j<NUMBER_OF_MINUTES; j++)
         {
-            for(int k = 0; k<NUMBER_OF_MINUTES; k++)
+            for(int k = 0; k<NUMBER_OF_COLORS; k++)
             {
                 daysAndMin[i][j][k]=0;
             }
@@ -86,7 +86,7 @@ int DataHandler::dayStats(uchar day7)
     std::cout << "N " << N << "%\r\n";
     return 0;
 }
-int int DataHandler::jamStats(uchar day7)
+int DataHandler::jamStats(uchar day7)
 {
     int red[24] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     int black[24] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
@@ -98,10 +98,10 @@ int int DataHandler::jamStats(uchar day7)
         {
             for(int k=0; k<NUMBER_OF_COLORS; k++)
             {
-                total[i] += daysAndMin[day][i*60+j][k];
+                total[i] += daysAndMin[day7][i*60+j][k];
             }
-            red[i] += daysAndMin[day][i*60+j][2];
-            black[i] += daysAndMin[day][i*60+j][3];
+            red[i] += daysAndMin[day7][i*60+j][2];
+            black[i] += daysAndMin[day7][i*60+j][3];
         }
         jam = (red[i]+black[i])/total[i];
         std::cout << day7 << " " << i << " " << jam << "%\r\n";
