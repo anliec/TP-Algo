@@ -85,7 +85,7 @@ int main()
     while(loop)
     {
         std::cin >> entry;
-        // input example: ADD 400 2015 11 02 14 08 0 V
+        // input example: ADD 400 2015 11 02 14 08 0 N
         if(entry.substr(0,3).compare("ADD")==0)
         {
             usint id, year;
