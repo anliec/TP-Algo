@@ -55,6 +55,9 @@ int DataHandler::sensorStats(usint id)
     R=100*R/total;
     N=100*N/total;
     std::cout << "V " << V << "%\r\n";
+    std::cout << "J " << J << "%\r\n";
+    std::cout << "R " << R << "%\r\n";
+    std::cout << "N " << N << "%\r\n";
     return 0;
 }
 
@@ -125,5 +128,8 @@ int DataHandler::dayStats(uchar day7)
     R=100*R/total;
     N=100*N/total;
     std::cout << "V " << V << "%\r\n";
+    std::cout << "J " << J << "%\r\n";
+    std::cout << "R " << R << "%\r\n";
+    std::cout << "N " << N << "%\r\n";
     return 0;
 }
