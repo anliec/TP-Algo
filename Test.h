@@ -10,6 +10,7 @@
 const int FILE_ERROR = 99;
 
 int generateTest2();
+int generateTest3();
 
 #endif //TP_ALGO_TEST_H
 
