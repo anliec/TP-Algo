@@ -9,54 +9,7 @@
 
 const int FILE_ERROR = 99;
 
-using namespace std;
-
-int generateTest2()
-{
-    ofstream file("test.txt", ios::out | ios::trunc);  // ouverture en écriture avec effacement du fichier ouvert
-    if(!file)
-    {
-        cout << "erreur d'ouverture de fichier" << endl;
-        return FILE_ERROR;
-    }
-
-    else
-    {
-        for (int id=0; id<1500; id++) {
-            for (int month=6; month <10; month++)
-            {
-                for (int day=0; day <30; day++)
-                {
-                    int relativeMonth = 6 - month;
-                    int day7 = (relativeMonth*30+day)^7;
-                    for (int hour=0; hour <24; hour++)
-                    {
-                        for (int min=0; min <60; min++)
-                        {
-
-                        }
-                    }
-                }
-            }
-        }
-    }
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+int generateTest2();
 
 #endif //TP_ALGO_TEST_H
 

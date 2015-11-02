@@ -1,11 +1,12 @@
 #include <string>
 #include <sstream>
-#include <stdlib.h>
 #include "DataHandler.h"
-#include "Data.h"
+#include "Test.h"
 
 int main()
 {
+    generateTest2();
+
     DataHandler handler;
 
     bool loop=true;
