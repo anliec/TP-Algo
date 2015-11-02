@@ -60,10 +60,12 @@
 //new version//
 const int NUMBER_OF_COLORS = 4;
 const int NUMBER_OF_SENSORS = 1500;
+const int NUMBER_OF_MINUTES = 1440;
 const int NUMBER_OF_DAYS = 7;
 
 int sensors[NUMBER_OF_SENSORS][NUMBER_OF_COLORS];
 int days[NUMBER_OF_DAYS][4];
+int daysAndMin[NUMBER_OF_DAYS][NUMBER_OF_MINUTES][NUMBER_OF_COLORS];
 
 int addData(int sensorId,uchar color);
 int sensorStats(int id);
@@ -72,8 +74,17 @@ int dayStats(int day7);
 int main()
 {
     for(int i = 0; i<NUMBER_OF_SENSORS; i++)
-        for(int j = 0; j<NUMBER_OF_SENSORS; j++)
+        for(int j = 0; j<NUMBER_OF_COLORS; j++)
             sensors[i][j]=0;
+
+    for(int i = 0; i<NUMBER_OF_DAYS; i++)
+        for(int j = 0; j<NUMBER_OF_COLORS; j++)
+            days[i][j]=0;
+
+    for(int i = 0; i<NUMBER_OF_DAYS; i++)
+        for(int j = 0; j<NUMBER_OF_MINUTES; j++)
+            for(int k = 0; k<NUMBER_OF_MINUTES; k++)
+            daysAndMin[i][j][k]=0;
 
     bool loop=true;
     std::string entry;
