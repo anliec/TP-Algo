@@ -98,6 +98,7 @@ int DataHandler::dayStats(uchar day7)
 int DataHandler::jamStats(uchar day7)
 {
     int weekDay = day7;
+    weekDay++; // increment for display
     int red[24] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     int black[24] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     int total[24] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
@@ -121,7 +122,6 @@ int DataHandler::jamStats(uchar day7)
         {
             jam = 0;
         }
-
         std::cout << weekDay << " " << i << " " << jam << "%\r\n";
     }
 }

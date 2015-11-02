@@ -5,4 +5,4 @@ OUTPUT=test/output
 
 $EXE < $INPUT > $OUTPUT
 
-diff $REF_OUTPUT $OUTPUT | grep "<"
+diff $REF_OUTPUT $OUTPUT #| grep "<"

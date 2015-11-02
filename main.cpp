@@ -14,7 +14,7 @@ int main()
     {
         std::cin >> entry;
         //std::cout << entry;
-        // input example: ADD 400 2015 11 02 14 08 0 N
+        // input example: ADD 400 2015 11 02 14 08 1 N
         if(entry.substr(0,3).compare("ADD")==0)
         {
             usint id, year;
@@ -22,6 +22,7 @@ int main()
             char trafic;
             //get the values from cin into integer:
             std::cin >> id >> year >> month >> day >> hours >> min >> weekDay >> trafic;
+            weekDay--;
             //translate the value into uchar:
             uchar c_month = month, c_day = day, c_hours = hours, c_min = min, c_weekDay = weekDay;
             handler.addData(Data(id,year,c_month,c_day,c_hours,c_min,c_weekDay,trafic));
@@ -36,6 +37,7 @@ int main()
         {
             usint weekDay;
             std::cin >> weekDay;
+            weekDay--;
             uchar c_weekday = weekDay;
             handler.jamStats(c_weekday);
         }
@@ -43,6 +45,7 @@ int main()
         {
             usint weekDay;
             std::cin >> weekDay;
+            weekDay--;
             uchar c_weekday = weekDay;
             handler.dayStats(c_weekday);
         }
