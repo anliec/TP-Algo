@@ -97,13 +97,14 @@ int DataHandler::dayStats(uchar day7)
 }
 int DataHandler::jamStats(uchar day7)
 {
+    int weekDay = day7;
     int red[24] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     int black[24] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     int total[24] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     for(int i=0; i<24; i++)
     {
         int jam;
-        for(int j=0; j<NUMBER_OF_MINUTES; j++)
+        for(int j=0; j<60; j++)
         {
             for(int k=0; k<NUMBER_OF_COLORS; k++)
             {
@@ -112,7 +113,15 @@ int DataHandler::jamStats(uchar day7)
             red[i] += daysAndMin[day7][i*60+j][2];
             black[i] += daysAndMin[day7][i*60+j][3];
         }
-        jam = (red[i]+black[i])/total[i];
-        std::cout << day7 << " " << i << " " << jam << "%\r\n";
+        if(total[i] != 0)
+        {
+            jam = (red[i]+black[i])*100/total[i];
+        }
+        else
+        {
+            jam = 0;
+        }
+
+        std::cout << weekDay << " " << i << " " << jam << "%\r\n";
     }
 }

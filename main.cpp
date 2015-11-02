@@ -30,21 +30,21 @@ int main()
         {
             usint id;
             std::cin >> id;
-
+            handler.sensorStats(id);
         }
         else if(entry.substr(0,6).compare("JAM_DH")==0)
         {
             usint weekDay;
             std::cin >> weekDay;
             uchar c_weekday = weekDay;
-
+            handler.jamStats(c_weekday);
         }
         else if(entry.substr(0,8).compare("STATS_D7")==0)
         {
             usint weekDay;
             std::cin >> weekDay;
             uchar c_weekday = weekDay;
-
+            handler.dayStats(c_weekday);
         }
         else if(entry.substr(0,3).compare("OPT")==0)
         {
