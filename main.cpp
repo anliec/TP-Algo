@@ -5,8 +5,6 @@
 
 int main()
 {
-    generateTest2();
-
     DataHandler handler;
 
     bool loop=true;
@@ -57,6 +55,10 @@ int main()
         else if(entry.substr(0,4).compare("EXIT")==0)
         {
             loop = false;
+        }
+        else if(entry.substr(0,8).compare("GENERATE")==0)
+        {
+            generateTest2();
         }
     }
     return 0;

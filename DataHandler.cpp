@@ -125,3 +125,75 @@ int DataHandler::jamStats(uchar day7)
         std::cout << weekDay << " " << i << " " << jam << "%\r\n";
     }
 }
+
+int DataHandler::optimum(uchar day7, int begginHours, int endHours, int idTab[], int tabSize)
+{
+    int bestTime=1440, currentTime=1440, leavingMin;
+    int endMin = endHours*60;
+    for(int currentMin=begginHours*60 ; currentMin < endMin ; currentMin++)
+    {
+        currentTime = computeTime(day7,currentMin,idTab,tabSize,bestTime);
+        if(currentTime < bestTime)
+        {
+            bestTime = currentTime;
+            leavingMin = currentMin;
+        }
+        int weekday = day7;
+        weekday++;
+        int min = leavingMin%60;
+        int hours = (leavingMin-min)/60;
+        std::cout << weekday << " " << hours << " " << min  << " " << bestTime << "\r\n";
+    }
+}
+
+int DataHandler::computeTime(uchar day7, int leavingMin, int idTab[], int tabSize, int currantBestTime)
+{
+    int currantMin = leavingMin;
+    int currantDuration = 0;
+    for(int i=0 ; i<tabSize ; i++)
+    {
+        currantDuration += duration(day7, currantMin, idTab[i]);
+        currantMin = currantDuration + leavingMin;
+        if(currantDuration >currantBestTime)
+        {
+            return 1440;
+        }
+    }
+    return currantDuration;
+}
+
+int DataHandler::duration(uchar day7, int minuteTime, int id)
+{
+    int duration=0;
+
+    return duration;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

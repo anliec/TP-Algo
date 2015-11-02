@@ -35,13 +35,15 @@ public:
     int sensorStats(usint id);
     int jamStats(uchar day7);
     int dayStats(uchar day7);
+    int optimum(uchar day7, int begginHours, int endHours, int idTab[], int tabSize);
 
     DataHandler();
     ~DataHandler();
 
 //Private methods
 private:
-
+    int computeTime(uchar day7, int leavingMin, int idTab[], int tabSize, int currantBestTime = 1440);
+    int duration(uchar day7, int minuteTime, int id);
 
 //Private attributes
 private:
