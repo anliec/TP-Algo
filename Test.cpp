@@ -37,11 +37,10 @@ int generateTest2()
         }
 
         inFile << "JAM_DH " << 0;
-        for (int i=0; i<23; i++)
+        for (int i=0; i<24; i++)
         {
             outFile << "0 " << i << " 0%\r\n";
         }
-        outFile << "0 " << 23 << " 0%";
     }
     cout << "end of test generation" << endl;
     return 0;
