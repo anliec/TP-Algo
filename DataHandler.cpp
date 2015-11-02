@@ -124,9 +124,10 @@ int DataHandler::jamStats(uchar day7)
         }
         std::cout << weekDay << " " << i << " " << jam << "%\r\n";
     }
+    return 0;
 }
 
-int DataHandler::optimum(uchar day7, int begginHours, int endHours, int idTab[], int tabSize)
+int DataHandler::optimum(uchar day7, uint begginHours, uint endHours, uint idTab[], uint tabSize)
 {
     int bestTime=1440, currentTime=1440, leavingMin;
     int endMin = endHours*60;
@@ -138,18 +139,19 @@ int DataHandler::optimum(uchar day7, int begginHours, int endHours, int idTab[],
             bestTime = currentTime;
             leavingMin = currentMin;
         }
-        int weekday = day7;
-        weekday++;
-        int min = leavingMin%60;
-        int hours = (leavingMin-min)/60;
-        std::cout << weekday << " " << hours << " " << min  << " " << bestTime << "\r\n";
     }
+    int weekday = day7;
+    weekday++;
+    int min = leavingMin%60;
+    int hours = (leavingMin-min)/60;
+    std::cout << weekday << " " << hours << " " << min  << " " << bestTime << "\r\n";
+    return 0;
 }
 
-int DataHandler::computeTime(uchar day7, int leavingMin, int idTab[], int tabSize, int currantBestTime)
+uint DataHandler::computeTime(uchar day7, uint leavingMin, uint idTab[], uint tabSize, uint currantBestTime)
 {
-    int currantMin = leavingMin;
-    int currantDuration = 0;
+    uint currantMin = leavingMin;
+    uint currantDuration = 0;
     for(int i=0 ; i<tabSize ; i++)
     {
         currantDuration += duration(day7, currantMin, idTab[i]);
@@ -162,10 +164,34 @@ int DataHandler::computeTime(uchar day7, int leavingMin, int idTab[], int tabSiz
     return currantDuration;
 }
 
-int DataHandler::duration(uchar day7, int minuteTime, int id)
+uint DataHandler::duration(uchar day7, uint minuteTime, uint id)
 {
-    int duration=0;
-
+    uint duration=0;
+    uint maxValue=0;
+    uint color=0;
+    for (int i = 0; i < 4; ++i) {
+        uint value = daysAndMin[day7][minuteTime][i];
+        if(value>maxValue)
+        {
+            maxValue = value;
+            color = i;
+        }
+    }
+    switch(color)
+    {
+        case 0:
+            duration=1;
+            break;
+        case 1:
+            duration=2;
+            break;
+        case 2:
+            duration=4;
+            break;
+        case 4:
+            duration=10;
+            break;
+    }
     return duration;
 }
 

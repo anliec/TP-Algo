@@ -11,8 +11,7 @@
 
 #include <iostream>
 
-#include "DataContainer.h"
-#include "DataPointerContainer.h"
+#include "Data.h"
 
 const unsigned int SENSORS_SIZE = 1500;
 const unsigned int WEEKDAYS_SIZE = 7;
@@ -22,6 +21,8 @@ const int NUMBER_OF_COLORS = 4;
 const int NUMBER_OF_SENSORS = 1500;
 const int NUMBER_OF_MINUTES = 1440;
 const int NUMBER_OF_DAYS = 7;
+
+typedef unsigned int uint;
 
 //------------------------------------------------------------------------
 // what is this class useful for ?
@@ -35,15 +36,15 @@ public:
     int sensorStats(usint id);
     int jamStats(uchar day7);
     int dayStats(uchar day7);
-    int optimum(uchar day7, int begginHours, int endHours, int idTab[], int tabSize);
+    int optimum(uchar day7, uint begginHours, uint endHours, uint idTab[], uint tabSize);
 
     DataHandler();
     ~DataHandler();
 
 //Private methods
 private:
-    int computeTime(uchar day7, int leavingMin, int idTab[], int tabSize, int currantBestTime = 1440);
-    int duration(uchar day7, int minuteTime, int id);
+    uint computeTime(uchar day7, uint leavingMin, uint idTab[], uint tabSize, uint currantBestTime = 1440);
+    uint duration(uchar day7, uint minuteTime, uint id);
 
 //Private attributes
 private:
