@@ -41,7 +41,10 @@ int generateTest2()
         {
             outFile << "1 " << i << " 0%\r\n";
         }
+        inFile << "EXIT\r\n";
+
     }
+
     cout << "end of test generation" << endl;
     return 0;
 }
@@ -191,8 +194,63 @@ int generateTest3()
         outFile << "R 25%\r\n";
         outFile << "N 25%\r\n";
 
+        inFile << "EXIT\r\n";
+
     }
-    inFile << "EXIT\r\n";
     cout << "end of test generation" << endl;
     return 0;
+}
+
+int generateTest4()
+{
+    ofstream inFile("C:\\Users\\Edern Haumont\\Documents\\test4.in", ios::out | ios::trunc);  // ouverture en écriture avec effacement du fichier ouvert
+    ofstream outFile("C:\\Users\\Edern Haumont\\Documents\\test4.out", ios::out | ios::trunc);  // ouverture en écriture avec effacement du fichier ouvert
+
+    if(!inFile || !outFile)
+    {
+        cout << "erreur d'ouverture de fichier" << endl;
+        return FILE_ERROR;
+    }
+
+    else
+    {
+        inFile << "ADD " << 0 << " " << 2015 << " " << 11 << " " << 24 << " " << 8 << " " <<
+        30 << " " << 1 << " " << 'R';
+        inFile << "ADD " << 0 << " " << 2015 << " " << 11 << " " << 24 << " " << 12 << " " <<
+        30 << " " << 1 << " " << 'J';
+        inFile << "ADD " << 0 << " " << 2015 << " " << 6 << " " << 28 << " " << 16 << " " <<
+        30 << " " << 1 << " " << 'N';
+
+        inFile << "ADD " << 99 << " " << 2015 << " " << 11 << " " << 24 << " " << 17 << " " <<
+        30 << " " << 1 << " " << 'V';
+        inFile << "ADD " << 99 << " " << 2015 << " " << 11 << " " << 24 << " " << 15 << " " <<
+        30 << " " << 1 << " " << 'N';
+
+        inFile << "ADD " << 1450 << " " << 2015 << " " << 11 << " " << 24 << " " << 9 << " " <<
+        30 << " " << 1 << " " << 'N';
+        inFile << "ADD " << 1450 << " " << 2015 << " " << 11 << " " << 24 << " " << 12 << " " <<
+        30 << " " << 1 << " " << 'J';
+        inFile << "ADD " << 1450 << " " << 2015 << " " << 11 << " " << 24 << " " << 10 << " " <<
+        30 << " " << 1 << " " << 'J';
+        inFile << "ADD " << 1450 << " " << 2015 << " " << 11 << " " << 24 << " " << 19 << " " <<
+        30 << " " << 1 << " " << 'V';
+
+        inFile << "ADD " << 948 << " " << 2015 << " " << 11 << " " << 24 << " " << 20 << " " <<
+        00 << " " << 1 << " " << 'R';
+        inFile << "ADD " << 948 << " " << 2015 << " " << 11 << " " << 24 << " " << 13 << " " <<
+        30 << " " << 1 << " " << 'V';
+        inFile << "ADD " << 948 << " " << 2015 << " " << 11 << " " << 24 << " " << 16 << " " <<
+        30 << " " << 1 << " " << 'J';
+
+        inFile << "ADD " << 169 << " " << 2015 << " " << 11 << " " << 24 << " " << 12 << " " <<
+        30 << " " << 1 << " " << 'N';
+        inFile << "ADD " << 169 << " " << 2015 << " " << 11 << " " << 24 << " " << 8 << " " <<
+        30 << " " << 1 << " " << 'R';
+
+        inFile << "OPT 1 8 20 5 0 99 1450 948 169\r\n";
+
+        outFile << "1 ";//TODO Write the output file
+
+        inFile << "EXIT\r\n";
+    }
 }
