@@ -14,6 +14,7 @@ int main()
     {
         std::cin >> entry;
         //std::cout << entry;
+        // input example: ADD 400 2015 11 02 14 08 0 N
         if(entry.substr(0,3).compare("ADD")==0)
         {
             usint id, year;

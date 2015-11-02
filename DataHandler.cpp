@@ -39,23 +39,32 @@ DataHandler::~DataHandler()
 
 int DataHandler::addData(const Data &data)
 {
+    int color, min, id, day7;
     switch(data.getTrafic())
     {
         case 'V' :
-            sensors[data.getId()][0]++;
+            color =0;
             break;
         case 'J' :
-            sensors[data.getId()][1]++;
+            color =1;
             break;
         case 'R' :
-            sensors[data.getId()][2]++;
+            color =2;
             break;
         case 'N' :
-            sensors[data.getId()][3]++;
+            color =3;
             break;
         default :
             return ERROR_INVALID_TRAFIC_UCHAR;
     }
+    min = data.getHours()*60 + data.getMin();
+    id = data.getId();
+    day7 = data.getWeekDay();
+
+    sensors[id][color]++;
+    days[day7][color]++;
+    daysAndMin[day7][min][color]++;
+
     return 0;
 }
 
