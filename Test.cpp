@@ -192,6 +192,7 @@ int generateTest3()
         outFile << "N 25%\r\n";
 
     }
+    inFile << "EXIT\r\n";
     cout << "end of test generation" << endl;
     return 0;
 }
