@@ -6,54 +6,66 @@
 
 DataHandler::DataHandler()
 {
-    weekDays = new DataPointerContainer[WEEKDAYS_SIZE];
-    sensors = new DataPointerContainer[SENSORS_SIZE];
+    for(int i = 0; i<NUMBER_OF_SENSORS; i++)
+    {
+        for(int j = 0; j<NUMBER_OF_COLORS; j++)
+        {
+            sensors[i][j] = 0;
+        }
+    }
+    for(int i = 0; i<NUMBER_OF_DAYS; i++)
+    {
+        for(int j = 0; j<NUMBER_OF_COLORS; j++)
+        {
+            days[i][j] = 0;
+        }
+    }
+    for(int i = 0; i<NUMBER_OF_DAYS; i++)
+    {
+        for(int j = 0; j<NUMBER_OF_MINUTES; j++)
+        {
+            for(int k = 0; k<NUMBER_OF_MINUTES; k++)
+            {
+                daysAndMin[i][j][k]=0;
+            }
+        }
+    }
 }
 
 DataHandler::~DataHandler()
 {
-    delete [] weekDays;
-    delete [] sensors;
+
 }
 
 int DataHandler::addData(const Data &data)
 {
-    container.add(data);
-    Data* currantData = &container.at(container.endingIndex());
-    weekDays[currantData->getDayNumber()].add(currantData);
-    sensors[currantData->getId()].add(currantData);
+    switch(data.getTrafic())
+    {
+        case 'V' :
+            sensors[data.getId()][0]++;
+            break;
+        case 'J' :
+            sensors[data.getId()][1]++;
+            break;
+        case 'R' :
+            sensors[data.getId()][2]++;
+            break;
+        case 'N' :
+            sensors[data.getId()][3]++;
+            break;
+        default :
+            return ERROR_INVALID_TRAFIC_UCHAR;
+    }
     return 0;
 }
 
 int DataHandler::sensorStats(usint id)
 {
-    double V=0,J=0,R=0,N=0;
-    for (int i=0; i<=sensors[id].endingIndex(); i++)
-    {
-        uchar iColor = sensors[id].at(i)->getTrafic();
-        switch(iColor)
-        {
-            case 'V' :
-                V++;
-                break;
-            case 'J' :
-                J++;
-                break;
-            case 'R' :
-                R++;
-                break;
-            case 'N' :
-                N++;
-                break;
-            default :
-                return ERROR_INVALID_TRAFIC_UCHAR;
-        }
-    }
-    double total = N+R+J+V;
-    V=100*V/total;
-    J=100*J/total;
-    R=100*R/total;
-    N=100*N/total;
+    int total = sensors[id][0]+sensors[id][1]+sensors[id][2]+sensors[id][3];
+    int V=100*sensors[id][0]/total;
+    int J=100*sensors[id][1]/total;
+    int R=100*sensors[id][2]/total;
+    int N=100*sensors[id][3]/total;
     std::cout << "V " << V << "%\r\n";
     std::cout << "J " << J << "%\r\n";
     std::cout << "R " << R << "%\r\n";
@@ -63,70 +75,17 @@ int DataHandler::sensorStats(usint id)
 
 int DataHandler::jamStats(uchar day7)
 {
-    int colorByHour[24][4];
-    for(int i=0; i<24;i++)
-        for(int j=0;j<4;j++)
-            colorByHour[i][j]=0;
-    for(int ite=0; ite<weekDays[day7].endingIndex();ite++)
-    {
-        uchar iColor = weekDays[day7].at(ite)->getTrafic();
-        uchar hour = weekDays[day7].at(ite)->getHours();
-        switch(iColor)
-        {
-            case 'V' :
-                colorByHour[hour][0]++;
-                break;
-            case 'J' :
-                colorByHour[hour][1]++;
-                break;
-            case 'R' :
-                colorByHour[hour][2]++;
-                break;
-            case 'N' :
-                colorByHour[hour][3]++;
-                break;
-            default :
-                return ERROR_INVALID_TRAFIC_UCHAR;
-        }
-    }
-    for(int ite=0; ite<24;ite++)
-    {
-        double hourResult = (colorByHour[ite][2]+colorByHour[ite][3])/(colorByHour[ite][0]+colorByHour[ite][1]+
-                colorByHour[ite][2]+colorByHour[ite][3])*100;
-        std::cout << day7 << " " << ite << " " << hourResult << "%\r\n";
-    }
+
     return 0;
 }
 
 int DataHandler::dayStats(uchar day7)
 {
-    double V=0,J=0,R=0,N=0;
-    for (int i=0; i<=sensors[day7].endingIndex(); i++)
-    {
-        uchar iColor = sensors[day7].at(i)->getTrafic();
-        switch(iColor)
-        {
-            case 'V' :
-                V++;
-                break;
-            case 'J' :
-                J++;
-                break;
-            case 'R' :
-                R++;
-                break;
-            case 'N' :
-                N++;
-                break;
-            default :
-                return ERROR_INVALID_TRAFIC_UCHAR;
-        }
-    }
-    double total = N+R+J+V;
-    V=100*V/total;
-    J=100*J/total;
-    R=100*R/total;
-    N=100*N/total;
+    int total = days[day7][0]+days[day7][1]+days[day7][2]+days[day7][3];
+    int V=100*days[day7][0]/total;
+    int J=100*days[day7][1]/total;
+    int R=100*days[day7][2]/total;
+    int N=100*days[day7][3]/total;
     std::cout << "V " << V << "%\r\n";
     std::cout << "J " << J << "%\r\n";
     std::cout << "R " << R << "%\r\n";
