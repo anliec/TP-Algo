@@ -33,6 +33,7 @@ class DataHandler {
 //Public methods
 public:
     int addData(const Data &data);
+    int addData(const char &trafic,const uint &min,const uint &hours,const uint &id,const uint &day7);
     int sensorStats(usint id);
     int jamStats(uchar day7);
     int dayStats(uchar day7);
