@@ -49,9 +49,9 @@ private:
 
 //Private attributes
 private:
-    int sensors[NUMBER_OF_SENSORS][NUMBER_OF_COLORS];
-    int days[NUMBER_OF_DAYS][4];
-    int daysAndMin[NUMBER_OF_DAYS][NUMBER_OF_MINUTES][NUMBER_OF_COLORS];
+    uint sensors[NUMBER_OF_SENSORS][NUMBER_OF_COLORS];
+    uint days[NUMBER_OF_DAYS][4];
+    uint daysAndMin[NUMBER_OF_DAYS][NUMBER_OF_MINUTES][NUMBER_OF_COLORS];
 
 }; //class DataHandler
 

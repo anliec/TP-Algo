@@ -181,7 +181,7 @@ uint DataHandler::duration(uchar day7, uint minuteTime, uint id)
     uint duration=0;
     uint maxValue=0;
     uint color=0;
-    for (int i = 0; i < 4; ++i) {
+    for (uint i = 0; i < 4; ++i) {
         uint value = daysAndMin[day7][minuteTime][i];
         if(value>maxValue)
         {

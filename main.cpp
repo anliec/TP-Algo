@@ -1,5 +1,7 @@
 #include <string>
 #include <sstream>
+#include <stdio.h>
+#include <string.h>
 #include "DataHandler.h"
 #include "Test.h"
 
@@ -9,15 +11,15 @@ int main()
 
     bool loop=true;
     std::string entry;
+    //char c_entry[20]; //using scanf is a bit slower than cin for string...
     //variable used in the while loop:
-    usint id, year, month, day, hours, min, weekDay;
-    uchar c_month, c_day, c_hours, c_min, c_weekDay;
+    uint id, hours, min, weekDay;
     char trafic;
 
     while(loop && !std::cin.eof())
     {
         std::cin >> entry;
-        //std::cout << "comande lu: \"" << entry << "\"" << std::endl;
+        //scanf("%19s",c_entry);
         // input example: ADD 400 2015 11 02 14 08 1 N
         if(entry.substr(0,3).compare("ADD")==0)
         {
@@ -32,40 +34,39 @@ int main()
             handler.addData(Data(id,year,c_month,c_day,c_hours,c_min,c_weekDay,trafic));
              ---optimisation---*/
 
-            //get the values from cin into integer:
-            std::cin >> id >> year >> month >> day >> hours >> min >> weekDay >> trafic;
-            //translate the value into uchar:
-            c_hours = hours; c_min = min; c_weekDay = weekDay-1;
-            handler.addData(trafic,min,hours,id,c_weekDay);
+            scanf("%u * * * %u %u %u %c",&id,&hours,&min,&weekDay,&trafic);
+            handler.addData(trafic,min,hours,id,weekDay-1);
         }
-        else if(entry.substr(0,7).compare("STATS_C")==0)
+        else if(entry.substr(0,3).compare("STATS_C")==0)
         {
-            std::cin >> id;
+            //std::cin >> id;
+            scanf("%u",&id);
             handler.sensorStats(id);
         }
         else if(entry.substr(0,6).compare("JAM_DH")==0)
         {
-            std::cin >> weekDay;
-            c_weekDay = weekDay-1;
-            handler.jamStats(c_weekDay);
+            //std::cin >> weekDay;
+            scanf("%u",&weekDay);
+            handler.jamStats(weekDay-1);
         }
         else if(entry.substr(0,8).compare("STATS_D7")==0)
         {
-            std::cin >> weekDay;
-            c_weekDay = weekDay-1;
-            handler.dayStats(c_weekDay);
+            //std::cin >> weekDay;
+            scanf("%u",&weekDay);
+            handler.dayStats(weekDay-1);
         }
         else if(entry.substr(0,3).compare("OPT")==0)
         {
-            usint startHours, endHours, tabSize;
-            std::cin >> weekDay >> startHours >> endHours >> tabSize;
-            c_weekDay = weekDay-1;
+            uint startHours, endHours, tabSize;
+            //std::cin >> weekDay >> startHours >> endHours >> tabSize;
+            scanf("%u %u %u %u",&weekDay,&startHours,&endHours,&tabSize);
             uint idTab[tabSize];
             for (int i = 0; i < tabSize; i++)
             {
-                std::cin >> idTab[i];
+                //std::cin >> idTab[i];
+                scanf("%u",&idTab[i]);
             }
-            handler.optimum(c_weekDay,startHours,endHours,idTab,tabSize);
+            handler.optimum(weekDay-1,startHours,endHours,idTab,tabSize);
         }
         else if(entry.substr(0,4).compare("EXIT")==0)
         {
