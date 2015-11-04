@@ -179,20 +179,20 @@ int generateTest3()
         }
 
         inFile << "STATS_C 1\r\n";
-        outFile << "V 100%\r\n";
-        outFile << "J 0%\r\n";
-        outFile << "R 0%\r\n";
-        outFile << "N 0%\r\n";
+        outFile << "V 26%\r\n";
+        outFile << "J 26%\r\n";
+        outFile << "R 23%\r\n";
+        outFile << "N 23%\r\n";
         inFile << "STATS_C 6\r\n";
-        outFile << "V 0%\r\n";
-        outFile << "J 50%\r\n";
-        outFile << "R 50%\r\n";
-        outFile << "N 0%\r\n";
+        outFile << "V 26%\r\n";
+        outFile << "J 26%\r\n";
+        outFile << "R 23%\r\n";
+        outFile << "N 23%\r\n";
         inFile << "STATS_C 7\r\n";
-        outFile << "V 25%\r\n";
-        outFile << "J 25%\r\n";
-        outFile << "R 25%\r\n";
-        outFile << "N 25%\r\n";
+        outFile << "V 26%\r\n";
+        outFile << "J 26%\r\n";
+        outFile << "R 23%\r\n";
+        outFile << "N 23%\r\n";
 
         inFile << "EXIT\r\n";
 
