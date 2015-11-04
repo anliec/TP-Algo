@@ -131,9 +131,9 @@ int DataHandler::jamStats(uchar day7)
 
 int DataHandler::optimum(uchar day7, uint begginHours, uint endHours, uint idTab[], uint tabSize)
 {
-    int bestTime=1440, currentTime=1440, leavingMin;
-    int endMin = endHours*60;
-    for(int currentMin=begginHours*60 ; currentMin < endMin ; currentMin++)
+    uint bestTime=1440, currentTime=1440, leavingMin=begginHours;
+    uint endMin = endHours*60;
+    for(uint currentMin=begginHours*60 ; currentMin < endMin ; currentMin++)
     {
         currentTime = computeTime(day7,currentMin,idTab,tabSize,bestTime);
         if(currentTime < bestTime)
@@ -142,10 +142,10 @@ int DataHandler::optimum(uchar day7, uint begginHours, uint endHours, uint idTab
             leavingMin = currentMin;
         }
     }
-    int weekday = day7;
+    uint weekday = day7;
     weekday++;
-    int min = leavingMin%60;
-    int hours = (leavingMin-min)/60;
+    uint min = leavingMin%60;
+    uint hours = (leavingMin-min)/60;
     std::cout << weekday << " " << hours << " " << min  << " " << bestTime << "\r\n";
     return 0;
 }
@@ -161,6 +161,16 @@ uint DataHandler::computeTime(uchar day7, uint leavingMin, uint idTab[], uint ta
         if(currantDuration >currantBestTime)
         {
             return 1440;
+        }
+        //check for min overflow:
+        if(currantMin > 1440)
+        {
+            currantMin -= 1440;
+            day7++;
+            if(day7>6)
+            {
+                day7=0;
+            }
         }
     }
     return currantDuration;
