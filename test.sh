@@ -1,9 +1,10 @@
 EXE=/home/nicolas/.clion11/system/cmake/generated/d268d9a5/d268d9a5/Debug/Tp-Algo
+#EXE=main
 INPUT=test/test3.in
 REF_OUTPUT=test/test3.out
 OUTPUT=test/output
 
-echo "statistique de l'éxécution:"
+echo "statistique de l'éxécution de: $EXE < $INPUT > $OUTPUT"
 
 /usr/bin/time -v $EXE < $INPUT > $OUTPUT
 

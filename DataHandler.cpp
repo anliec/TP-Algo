@@ -6,30 +6,45 @@
 
 DataHandler::DataHandler()
 {
-    for(int i = 0; i<NUMBER_OF_SENSORS; i++)
+    for(uint i = 0; i<NUMBER_OF_SENSORS; i++)
     {
-        for(int j = 0; j<NUMBER_OF_COLORS; j++)
+        for(uint j = 0; j<NUMBER_OF_COLORS; j++)
         {
             sensors[i][j] = 0;
         }
     }
-    for(int i = 0; i<NUMBER_OF_DAYS; i++)
+    for(uint i = 0; i<NUMBER_OF_DAYS; i++)
     {
-        for(int j = 0; j<NUMBER_OF_COLORS; j++)
+        for(uint j = 0; j<NUMBER_OF_COLORS; j++)
         {
             days[i][j] = 0;
         }
     }
-    for(int i = 0; i<NUMBER_OF_DAYS; i++)
+    for (int day = 0; day < NUMBER_OF_DAYS; day++)
     {
-        for(int j = 0; j<NUMBER_OF_MINUTES; j++)
+        for (int h = 0; h < NUMBER_OF_HOURS; ++h)
         {
-            for(int k = 0; k<NUMBER_OF_COLORS; k++)
+            for (int t = 0; t < NUMBER_OF_COLORS; ++t)
             {
-                daysAndMin[i][j][k]=0;
+                daysAndHours[day][h][t] = 0;
             }
         }
     }
+#ifdef OPT
+    for (uint id = 0; id < 2; id++)
+    {
+        for(uint i = 0; i<NUMBER_OF_DAYS; i++)
+        {
+            for(uint j = 0; j<NUMBER_OF_MINUTES; j++)
+            {
+                for(uint k = 0; k<NUMBER_OF_COLORS; k++)
+                {
+                    daysAndMin[id][i][j][k]=0;
+                }
+            }
+        }
+    }
+#endif
 }
 
 DataHandler::~DataHandler()
@@ -65,8 +80,10 @@ int DataHandler::addData(const char &trafic,const uint &min,const uint &hours,co
 
     sensors[id][color]++;
     days[day7][color]++;
-    daysAndMin[day7][dayMin][color]++;
-
+    daysAndHours[day7][hours][color]++;
+#ifdef OPT
+    daysAndMin[id][day7][dayMin][color]++;
+#endif
     return 0;
 }
 
@@ -101,7 +118,7 @@ int DataHandler::jamStats(uchar day7)
 {
     int weekDay = day7;
     weekDay++; // increment for display
-    int red[24] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    /*int red[24] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     int black[24] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     int total[24] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     for(int i=0; i<24; i++)
@@ -125,10 +142,26 @@ int DataHandler::jamStats(uchar day7)
             jam = 0;
         }
         std::cout << weekDay << " " << i << " " << jam << "%\r\n";
+    }*/
+    uint total, redAndBlack, jam;
+    for (int h = 0; h < NUMBER_OF_HOURS; ++h)
+    {
+        redAndBlack = daysAndHours[day7][h][2]+daysAndHours[day7][h][3];
+        total = daysAndHours[day7][h][0]+daysAndHours[day7][h][1]+redAndBlack;
+        if(total != 0)
+        {
+            jam = (redAndBlack)*100/total;
+        }
+        else
+        {
+            jam = 0;
+        }
+        std::cout << weekDay << " " << h << " " << jam << "%\r\n";
     }
+
     return 0;
 }
-
+#ifdef OPT
 int DataHandler::optimum(uchar day7, uint begginHours, uint endHours, uint idTab[], uint tabSize)
 {
     uint bestTime=1440, currentTime=1440, leavingMin=begginHours;
@@ -182,7 +215,7 @@ uint DataHandler::duration(uchar day7, uint minuteTime, uint id)
     uint maxValue=0;
     uint color=0;
     for (uint i = 0; i < 4; ++i) {
-        uint value = daysAndMin[day7][minuteTime][i];
+        uint value = daysAndMin[id][day7][minuteTime][i];
         if(value>maxValue)
         {
             maxValue = value;
@@ -203,10 +236,12 @@ uint DataHandler::duration(uchar day7, uint minuteTime, uint id)
         case 4:
             duration=10;
             break;
+        default:
+            return ERROR_INVALID_TRAFIC_UCHAR;
     }
     return duration;
 }
-
+#endif
 
 
 
