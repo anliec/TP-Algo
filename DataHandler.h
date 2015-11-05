@@ -13,6 +13,9 @@
 
 #include "Data.h"
 
+//uncomment to use optimum function:
+#define OPT
+
 const unsigned int ERROR_INVALID_TRAFIC_UCHAR = 201;
 
 const int NUMBER_OF_COLORS = 4;
@@ -54,7 +57,7 @@ private:
     uint days[NUMBER_OF_DAYS][NUMBER_OF_COLORS];
     uint daysAndHours[NUMBER_OF_DAYS][NUMBER_OF_HOURS][NUMBER_OF_COLORS];
 #ifdef OPT
-    unsigned char daysAndMin[NUMBER_OF_SENSORS][NUMBER_OF_DAYS][NUMBER_OF_MINUTES][NUMBER_OF_COLORS];
+    unsigned char *daysAndMin[NUMBER_OF_DAYS][NUMBER_OF_MINUTES][NUMBER_OF_COLORS];
 #endif
 
 }; //class DataHandler

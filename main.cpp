@@ -5,8 +5,7 @@
 #include "DataHandler.h"
 #include "Test.h"
 
-//uncomment to use optimum function:
-//#define OPT
+
 
 int main()
 {

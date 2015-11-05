@@ -20,26 +20,27 @@ DataHandler::DataHandler()
             days[i][j] = 0;
         }
     }
-    for (int day = 0; day < NUMBER_OF_DAYS; day++)
+    for (int day = 0; day<NUMBER_OF_DAYS; day++)
     {
-        for (int h = 0; h < NUMBER_OF_HOURS; ++h)
+        for (int h = 0; h<NUMBER_OF_HOURS; ++h)
         {
-            for (int t = 0; t < NUMBER_OF_COLORS; ++t)
+            for (int t = 0; t<NUMBER_OF_COLORS; ++t)
             {
                 daysAndHours[day][h][t] = 0;
             }
         }
     }
 #ifdef OPT
-    for (uint id = 0; id < 2; id++)
+    for(uint day = 0; day<NUMBER_OF_DAYS; day++)
     {
-        for(uint i = 0; i<NUMBER_OF_DAYS; i++)
+        for(uint min = 0; min<NUMBER_OF_MINUTES; min++)
         {
-            for(uint j = 0; j<NUMBER_OF_MINUTES; j++)
+            for(uint color = 0; color<NUMBER_OF_COLORS; color++)
             {
-                for(uint k = 0; k<NUMBER_OF_COLORS; k++)
+                daysAndMin[day][min][color] = new unsigned char[NUMBER_OF_SENSORS];
+                for(uint id=0 ; id<NUMBER_OF_SENSORS ; id++)
                 {
-                    daysAndMin[id][i][j][k]=0;
+                    daysAndMin[day][min][color][id]=0;
                 }
             }
         }
@@ -49,7 +50,16 @@ DataHandler::DataHandler()
 
 DataHandler::~DataHandler()
 {
-
+    for(uint day = 0; day<NUMBER_OF_DAYS; day++)
+    {
+        for(uint min = 0; min<NUMBER_OF_MINUTES; min++)
+        {
+            for(uint color = 0; color<NUMBER_OF_COLORS; color++)
+            {
+                delete [] daysAndMin[day][min][color];
+            }
+        }
+    }
 }
 
 int DataHandler::addData(const Data &data)
@@ -82,7 +92,7 @@ int DataHandler::addData(const char &trafic,const uint &min,const uint &hours,co
     days[day7][color]++;
     daysAndHours[day7][hours][color]++;
 #ifdef OPT
-    daysAndMin[id][day7][dayMin][color]++;
+    daysAndMin[day7][dayMin][color][id]++;
 #endif
     return 0;
 }
@@ -215,7 +225,7 @@ uint DataHandler::duration(uchar day7, uint minuteTime, uint id)
     uint maxValue=0;
     uint color=0;
     for (uint i = 0; i < 4; ++i) {
-        uint value = daysAndMin[id][day7][minuteTime][i];
+        uint value = daysAndMin[day7][minuteTime][i][id];
         if(value>maxValue)
         {
             maxValue = value;
