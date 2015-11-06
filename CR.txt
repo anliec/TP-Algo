@@ -1,0 +1,7 @@
+Document of specification
+
+Choice of the data structure
+Our application must support 20 million events from 1500 sensors
+
+
+Document of test description
