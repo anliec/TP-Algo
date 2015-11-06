@@ -1,7 +1,9 @@
 Document of specification
 
 Choice of the data structure
-Our application must support 20 million events from 1500 sensors
+Our application must support 20 million events from 1500 sensors. Consequently, we chose not to store event themeselves as they arrive. However, at the launch of our program, several static arrays of entire values are created. Their indexes correspond to the information used to anwer to the user querries, for instance the sensor number, the hour,etc. Their last dimension corresponds to a sensor color. So when an event is added, we just increment one cell in each array.
 
 
 Document of test description
+
+We used a few manually generated test and we generated some bigger input files with a generation code.
