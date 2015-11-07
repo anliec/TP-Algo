@@ -12,6 +12,7 @@
 #include <iostream>
 
 #include "Data.h"
+#include "IdHash.h"
 
 //uncomment to use optimum function:
 #define OPT
