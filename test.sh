@@ -14,6 +14,7 @@ do
 	INPUT=$( echo $inputList | awk "{ print \$$i }")
 	REF_OUTPUT=$( echo $outputList | awk "{ print \$$i }")
 
+	echo ""
 	echo "======================================="
 	echo "Éxecution de $INPUT"
 	echo "======================================="
