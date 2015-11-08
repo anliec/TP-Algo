@@ -49,11 +49,12 @@ public:
 //Private methods
 private:
 #ifdef OPT
-    uint computeTime(uchar day7, uint leavingMin, uint idTab[], uint tabSize, uint currantBestTime = 1440);
-    uint duration(uchar day7, uint minuteTime, uint id);
+    uint computeTime(uchar day7, uint leavingMin, uint idsInTab[], uint tabSize, uint currantBestTime = 1440);
+    uint duration(uchar day7, uint minuteTime, uint idInTab);
 #endif
 //Private attributes
 private:
+    IdHash idHash;
     uint sensors[NUMBER_OF_SENSORS][NUMBER_OF_COLORS];
     uint days[NUMBER_OF_DAYS][NUMBER_OF_COLORS];
     uint daysAndHours[NUMBER_OF_DAYS][NUMBER_OF_HOURS][NUMBER_OF_COLORS];

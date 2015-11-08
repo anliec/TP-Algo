@@ -27,9 +27,17 @@ IdHash::~IdHash()
     }
 }
 
-void IdHash::addId(const unsigned &id)
+unsigned IdHash::addId(const unsigned &id)
 {
-    insertAt(hashFunction(id),id);
+    unsigned idInTab, pos=hashFunction(id);
+    if(alreadyAdded(id,pos,idInTab))
+    {
+        return idInTab;
+    }
+    else
+    {
+        return insertAt(pos,id);
+    }
 }
 
 unsigned int IdHash::getTabId(const unsigned & id) const
@@ -42,7 +50,7 @@ unsigned IdHash::hashFunction(const unsigned &id) const
     return ((id*A+B)%PRIME_NUMBER)%SIZE_OF_HASHTABLE;
 }
 
-void IdHash::insertAt(const unsigned &pos, const unsigned &id)
+unsigned IdHash::insertAt(const unsigned &pos, const unsigned &id)
 {
     if(sizeOfHashList[pos][0]+1>sizeOfHashList[pos][1])
     {
@@ -71,7 +79,9 @@ void IdHash::insertAt(const unsigned &pos, const unsigned &id)
     hashTable[pos][1][sizeOfHashList[pos][0]] = lastIdInTab;
     lastIdInTab++;
     sizeOfHashList[pos][0]++;
+    return lastIdInTab-1;
 }
+
 unsigned IdHash::readAt(const unsigned &pos, const unsigned &id) const
 {
     for (int i = 0; i < sizeOfHashList[pos][0]; i++)
@@ -82,4 +92,16 @@ unsigned IdHash::readAt(const unsigned &pos, const unsigned &id) const
         }
     }
     return 0;
+}
+
+bool IdHash::alreadyAdded(const unsigned &id, const unsigned pos, unsigned &retToTabId) const
+{
+    for (int i = 0; i < sizeOfHashList[pos][0]; ++i) {
+        if(hashTable[pos][i][0] == id)
+        {
+            retToTabId = hashTable[pos][i][1];
+            return true;
+        }
+    }
+    return false;
 }

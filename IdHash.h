@@ -18,13 +18,17 @@ public:
     IdHash();
     ~IdHash();
 
-    void addId(const unsigned & id);
+    unsigned addId(const unsigned & id);
+    /* add the id to the hash table if not already in
+     */
+
     unsigned getTabId(const unsigned & id) const;
 
 private:
     unsigned hashFunction(const unsigned & id) const;
-    void insertAt(const unsigned & pos, const unsigned & id);
+    unsigned insertAt(const unsigned & pos, const unsigned & id); //return the tab id
     unsigned readAt(const unsigned & pos, const unsigned &id) const;
+    bool alreadyAdded(const unsigned & id, const unsigned pos, unsigned & retToTabId) const;
 
 private:
     unsigned * hashTable[SIZE_OF_HASHTABLE][2]; // 0: id // 1: id in tabs

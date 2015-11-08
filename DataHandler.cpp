@@ -87,23 +87,24 @@ int DataHandler::addData(const char &trafic,const uint &min,const uint &hours,co
             return ERROR_INVALID_TRAFIC_UCHAR;
     }
     uint dayMin = hours*60 + min;
-
-    sensors[id][color]++;
+    uint idInTab = idHash.addId(id); //add the id in the hash tab if necessary and return a number for tab use
+    sensors[idInTab][color]++;
     days[day7][color]++;
     daysAndHours[day7][hours][color]++;
 #ifdef OPT
-    daysAndMin[day7][dayMin][color][id]++;
+    daysAndMin[day7][dayMin][color][idInTab]++;
 #endif
     return 0;
 }
 
 int DataHandler::sensorStats(usint id)
 {
-    int total = sensors[id][0]+sensors[id][1]+sensors[id][2]+sensors[id][3];
-    int V=100*sensors[id][0]/total;
-    int J=100*sensors[id][1]/total;
-    int R=100*sensors[id][2]/total;
-    int N=100*sensors[id][3]/total;
+    uint idInTab = idHash.getTabId(id);
+    int total = sensors[idInTab][0]+sensors[idInTab][1]+sensors[idInTab][2]+sensors[idInTab][3];
+    int V=100*sensors[idInTab][0]/total;
+    int J=100*sensors[idInTab][1]/total;
+    int R=100*sensors[idInTab][2]/total;
+    int N=100*sensors[idInTab][3]/total;
     std::cout << "V " << V << "%\r\n";
     std::cout << "J " << J << "%\r\n";
     std::cout << "R " << R << "%\r\n";
@@ -128,31 +129,6 @@ int DataHandler::jamStats(uchar day7)
 {
     int weekDay = day7;
     weekDay++; // increment for display
-    /*int red[24] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-    int black[24] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-    int total[24] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-    for(int i=0; i<24; i++)
-    {
-        int jam;
-        for(int j=0; j<60; j++)
-        {
-            for(int k=0; k<NUMBER_OF_COLORS; k++)
-            {
-                total[i] += daysAndMin[day7][i*60+j][k];
-            }
-            red[i] += daysAndMin[day7][i*60+j][2];
-            black[i] += daysAndMin[day7][i*60+j][3];
-        }
-        if(total[i] != 0)
-        {
-            jam = (red[i]+black[i])*100/total[i];
-        }
-        else
-        {
-            jam = 0;
-        }
-        std::cout << weekDay << " " << i << " " << jam << "%\r\n";
-    }*/
     uint total, redAndBlack, jam;
     for (int h = 0; h < NUMBER_OF_HOURS; ++h)
     {
@@ -174,11 +150,18 @@ int DataHandler::jamStats(uchar day7)
 #ifdef OPT
 int DataHandler::optimum(uchar day7, uint begginHours, uint endHours, uint idTab[], uint tabSize)
 {
+    //convertion of the id tab to daysAndMin usable value;
+    unsigned idsInTab[tabSize];
+    for (int i = 0; i < tabSize; i++)
+    {
+        idsInTab[i] = idHash.getTabId(idTab[i]);
+    }
+
     uint bestTime=1440, currentTime=1440, leavingMin=begginHours;
     uint endMin = endHours*60;
     for(uint currentMin=begginHours*60 ; currentMin < endMin ; currentMin++)
     {
-        currentTime = computeTime(day7,currentMin,idTab,tabSize,bestTime);
+        currentTime = computeTime(day7,currentMin,idsInTab,tabSize,bestTime);
         if(currentTime < bestTime)
         {
             bestTime = currentTime;
@@ -193,13 +176,13 @@ int DataHandler::optimum(uchar day7, uint begginHours, uint endHours, uint idTab
     return 0;
 }
 
-uint DataHandler::computeTime(uchar day7, uint leavingMin, uint idTab[], uint tabSize, uint currantBestTime)
+uint DataHandler::computeTime(uchar day7, uint leavingMin, uint idsInTab[], uint tabSize, uint currantBestTime)
 {
     uint currantMin = leavingMin;
     uint currantDuration = 0;
     for(int i=0 ; i<tabSize ; i++)
     {
-        currantDuration += duration(day7, currantMin, idTab[i]);
+        currantDuration += duration(day7, currantMin, idsInTab[i]);
         currantMin = currantDuration + leavingMin;
         if(currantDuration >currantBestTime)
         {
@@ -219,13 +202,13 @@ uint DataHandler::computeTime(uchar day7, uint leavingMin, uint idTab[], uint ta
     return currantDuration;
 }
 
-uint DataHandler::duration(uchar day7, uint minuteTime, uint id)
+uint DataHandler::duration(uchar day7, uint minuteTime, uint idInTab)
 {
     uint duration=0;
     uint maxValue=0;
     uint color=0;
     for (uint i = 0; i < 4; ++i) {
-        uint value = daysAndMin[day7][minuteTime][i][id];
+        uint value = daysAndMin[day7][minuteTime][i][idInTab];
         if(value>maxValue)
         {
             maxValue = value;
