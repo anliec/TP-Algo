@@ -4,12 +4,26 @@ INPUT=test/test3.in
 REF_OUTPUT=test/test3.out
 OUTPUT=test/output
 
-echo "statistique de l'éxécution de: $EXE < $INPUT > $OUTPUT"
+inputList=$(ls test/*.in)
+outputList=$(ls test/*.out)
 
-/usr/bin/time -v $EXE < $INPUT > $OUTPUT
+NumberOfInput=$( echo $inputList | wc -w)
 
-echo ""
-echo "Diférences trouvées avec la sortie attandue:"
-echo ""
+for i in `seq 1 $NumberOfInput`
+do
+	INPUT=$( echo $inputList | awk "{ print \$$i }")
+	REF_OUTPUT=$( echo $outputList | awk "{ print \$$i }")
 
-diff $OUTPUT $REF_OUTPUT --report-identical-files --side-by-side --suppress-common-lines
+	echo "======================================="
+	echo "Éxecution de $INPUT"
+	echo "======================================="
+	echo ""
+
+	/usr/bin/time -v $EXE < $INPUT > $OUTPUT
+
+	echo ""
+	echo "Diférences trouvées avec la sortie attendu:"
+	echo ""
+
+	diff $OUTPUT $REF_OUTPUT --report-identical-files --side-by-side --suppress-common-lines
+done
