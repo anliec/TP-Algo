@@ -1,7 +1,7 @@
 Document of specification
 
 Choice of the data structure
-Our application must support 20 million events from 1500 sensors. Consequently, we chose not to store event themeselves as they arrive. However, at the launch of our program, several static arrays of entire values are created. Their indexes correspond to the information used to anwer to the user querries, for instance the sensor number, the hour,etc. Their last dimension corresponds to a sensor color. So when an event is added, we just increment one cell in each array.
+Our application must support 20 million events from 1500 sensors. Consequently, we chose not to store event themselves as they arrive. However, at the launch of our program, several static arrays of entire values are created. Their indexes correspond to the information used to anwer to the user querries, for instance the sensor number, the hour,etc. Their last dimension corresponds to a sensor color. So when an event is added, we just increment one cell in each array.
 
 
 Class DataHandler
@@ -16,12 +16,12 @@ prints a sensor statistics using the private array uint sensors[NUMBER_OF_SENSOR
 int jamStats(uchar day7);
 prints jam statistics by hour using the private array uint daysAndHours[NUMBER_OF_DAYS][NUMBER_OF_HOURS][NUMBER_OF_COLORS];
 int dayStats(uchar day7);
-prints a week day stattistics using the private array uint days[NUMBER_OF_DAYS][NUMBER_OF_COLORS];
+prints a week day statistics using the private array uint days[NUMBER_OF_DAYS][NUMBER_OF_COLORS];
 
 
 
 Class IdHash
-The user can only declare 1500 sensors but their id is not necessarely below 1500. As the DataHandler only computes sensors with a number between 0 and 1499 (for instance for some indexes in our static arrays), we use the IdHash to link the real id of a sensor to its virtual number.
+The user can only declare 1500 sensors but their id is not necessarily below 1500. As the DataHandler only computes sensors with a number between 0 and 1499 (for instance for some indexes in our static arrays), we use the IdHash to link the real id of a sensor to its virtual number.
 
 public methods :
 void addId(const unsigned & id);
@@ -38,7 +38,8 @@ To test or application, we made it read the input file instead of the keyboard i
 generation methods :
 
 int generateTest2();
-generates entries (all green) for 1500 sensors and a restricted time interval. Calls JAM_DH querry to test input values. Used to check that the program runs.
+generates entries (all green) for 1500 sensors and a restricted time interval. Calls JAM_DH query to test input values. Used to check that the program runs.
 int generateTest3();
-generates entries for 50 sensors but in bigger time intervalls and multiple traffics. Calls the 3 different querries with several parameters. Used o check that the program computes datas properly.
-
+generates entries for 50 sensors but in bigger time intervals and multiple traffics. Calls the 3 different queries with several parameters. Used o check that the program computes datas properly.
+int generateTest4();
+generates some entries to test basically if the last query works. Fast to check.
