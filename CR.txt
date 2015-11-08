@@ -42,4 +42,4 @@ generates entries (all green) for 1500 sensors and a restricted time interval. C
 int generateTest3();
 generates entries for 50 sensors but in bigger time intervals and multiple traffics. Calls the 3 different queries with several parameters. Used o check that the program computes datas properly.
 int generateTest4();
-generates some entries to test basically if the last query works. Fast to check.
+generates some entries to test basically if the last query works with some missing values. Fast to check.

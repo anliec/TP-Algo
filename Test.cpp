@@ -254,7 +254,7 @@ int generateTest4()
 
         inFile << "OPT 1 8 20 5 0 99 1450 948 169\r\n";
 
-        outFile << "1 ";//TODO Write the output file 19/11/17
+        outFile << "1 8 00 5\r\n";
 
         inFile << "EXIT\r\n";
     }
