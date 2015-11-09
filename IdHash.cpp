@@ -97,9 +97,9 @@ unsigned IdHash::readAt(const unsigned &pos, const unsigned &id) const
 bool IdHash::alreadyAdded(const unsigned &id, const unsigned pos, unsigned &retToTabId) const
 {
     for (int i = 0; i < sizeOfHashList[pos][0]; ++i) {
-        if(hashTable[pos][i][0] == id)
+        if(hashTable[pos][0][i] == id)
         {
-            retToTabId = hashTable[pos][i][1];
+            retToTabId = hashTable[pos][1][i];
             return true;
         }
     }

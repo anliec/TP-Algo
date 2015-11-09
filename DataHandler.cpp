@@ -94,6 +94,7 @@ int DataHandler::addData(const char &trafic,const uint &min,const uint &hours,co
 #ifdef OPT
     daysAndMin[day7][dayMin][color][idInTab]++;
 #endif
+
     return 0;
 }
 
@@ -101,10 +102,21 @@ int DataHandler::sensorStats(usint id)
 {
     uint idInTab = idHash.getTabId(id);
     int total = sensors[idInTab][0]+sensors[idInTab][1]+sensors[idInTab][2]+sensors[idInTab][3];
-    int V=100*sensors[idInTab][0]/total;
-    int J=100*sensors[idInTab][1]/total;
-    int R=100*sensors[idInTab][2]/total;
-    int N=100*sensors[idInTab][3]/total;
+    int V,J,R,N;
+    if(total!=0)
+    {
+        V=100*sensors[idInTab][0]/total;
+        J=100*sensors[idInTab][1]/total;
+        R=100*sensors[idInTab][2]/total;
+        N=100*sensors[idInTab][3]/total;
+    }
+    else
+    {
+        V=0;
+        J=0;
+        R=0;
+        N=0;
+    }
     std::cout << "V " << V << "%\r\n";
     std::cout << "J " << J << "%\r\n";
     std::cout << "R " << R << "%\r\n";
@@ -115,10 +127,21 @@ int DataHandler::sensorStats(usint id)
 int DataHandler::dayStats(uchar day7)
 {
     int total = days[day7][0]+days[day7][1]+days[day7][2]+days[day7][3];
-    int V=100*days[day7][0]/total;
-    int J=100*days[day7][1]/total;
-    int R=100*days[day7][2]/total;
-    int N=100*days[day7][3]/total;
+    int V,J,R,N;
+    if(total!=0)
+    {
+        V=100*days[day7][0]/total;
+        J=100*days[day7][1]/total;
+        R=100*days[day7][2]/total;
+        N=100*days[day7][3]/total;
+    }
+    else
+    {
+        V=0;
+        J=0;
+        R=0;
+        N=0;
+    }
     std::cout << "V " << V << "%\r\n";
     std::cout << "J " << J << "%\r\n";
     std::cout << "R " << R << "%\r\n";
