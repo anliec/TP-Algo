@@ -288,7 +288,7 @@ int generateTest5()
                     int min = randMin();
                     int hour = randHour();
                     inFile << "ADD " << sensors[sensorIndex] << " " << 2015 << " " << month << " " << day << " " << hour << " " <<
-                    min << " " << day7 << " " << 'V' <<"\r\n";
+                    min << " " << day7 << " " << color <<"\r\n";
                 }
             }
         }
@@ -316,7 +316,7 @@ int generateTest5()
             inFile << " " << sensors[i];
         }
         inFile << "\r\n";
-        inFile << "OPT 1 0 11 10";
+        inFile << "OPT 1 12 23 10";
         for(int i=10; i<20; i++)
         {
             inFile << " " << sensors[i];
