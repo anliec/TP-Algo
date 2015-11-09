@@ -1,6 +1,8 @@
 //
 // Created by Edern Haumont on 19/10/2015.
 //
+#include <stdlib.h>
+#include <time.h>
 #include "Test.h"
 
 using namespace std;
@@ -258,4 +260,121 @@ int generateTest4()
 
         inFile << "EXIT\r\n";
     }
+    return 0;
+}
+
+int generateTest5()
+{
+    ofstream inFile("C:\\Users\\Edern Haumont\\Documents\\test5.in", ios::out | ios::trunc);  // ouverture en écriture avec effacement du fichier ouvert
+    if(!inFile)
+    {
+        cout << "erreur d'ouverture de fichier" << endl;
+        return FILE_ERROR;
+    }
+
+    else
+    {
+        srand ( time(NULL) );
+        int sensors[1500];
+        randSensList(sensors, 1500);
+        for(int sensorIndex =0; sensorIndex<1500; sensorIndex++)
+        {
+            for(int day=0; day<30; day++)
+            {
+                for(int month=0; month<444; month++)
+                {
+                    char color = randState();
+                    int day7 = randDay7();
+                    int min = randMin();
+                    int hour = randHour();
+                    inFile << "ADD " << sensors[sensorIndex] << " " << 2015 << " " << month << " " << day << " " << hour << " " <<
+                    min << " " << day7 << " " << 'V' <<"\r\n";
+                }
+            }
+        }
+        for(int i=0;i<1500;i++)
+        {
+            inFile << "STATS_C "<< sensors[i] <<"\r\n";
+        }
+        inFile << "JAM_DH 1\r\n";
+        inFile << "JAM_DH 2\r\n";
+        inFile << "JAM_DH 3\r\n";
+        inFile << "JAM_DH 4\r\n";
+        inFile << "JAM_DH 5\r\n";
+        inFile << "JAM_DH 6\r\n";
+        inFile << "JAM_DH 7\r\n";
+        inFile << "STATS_D7 1\r\n";
+        inFile << "STATS_D7 2\r\n";
+        inFile << "STATS_D7 3\r\n";
+        inFile << "STATS_D7 4\r\n";
+        inFile << "STATS_D7 5\r\n";
+        inFile << "STATS_D7 6\r\n";
+        inFile << "STATS_D7 7\r\n";
+        inFile << "OPT 1 0 11 10";
+        for(int i=0; i<10; i++)
+        {
+            inFile << " " << sensors[i];
+        }
+        inFile << "\r\n";
+        inFile << "OPT 1 0 11 10";
+        for(int i=10; i<20; i++)
+        {
+            inFile << " " << sensors[i];
+        }
+        inFile << "\r\n";
+        inFile << "EXIT\r\n";
+        cout << "generated 5!" <<endl;
+    }
+}
+
+int randSensList(int* sensors, int size)
+{
+    for (int t=0;t<1500;t++)
+    {
+        int random;
+        bool newNumber=false;
+        while (newNumber==false)
+        {
+            random = (rand()*rand())+1;
+            newNumber=true;
+            for(int j=0; j<t;j++)
+            {
+                if (sensors[j]== random)
+                    newNumber=false;
+            }
+        }
+        sensors[t]=random;
+    }
+    return 0;
+}
+int randDay7()
+{
+    return (rand()%7)+1;
+    return 0;
+}
+int randState()
+{
+    char num = rand()%4;
+    switch(num)
+    {
+        case 0:
+            return 'V';
+        case 1:
+            return 'J';
+        case 2:
+            return 'R';
+        case 3:
+            return 'N';
+    }
+    return 0;
+}
+int randHour()
+{
+    return rand()%24;
+    return 0;
+}
+int randMin()
+{
+    return rand()%60;
+    return 0;
 }

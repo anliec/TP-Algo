@@ -12,33 +12,12 @@ const int FILE_ERROR = 99;
 int generateTest2();
 int generateTest3();
 int generateTest4();
+int generateTest5();
+
+int randSensList(int * sensors, int size);
+int randDay7();
+int randState();
+int randHour();
+int randMin();
 
 #endif //TP_ALGO_TEST_H
-
-/*
- * #include <iostream>
-#include <string>
-#include <fstream>
-
-using namespace std;
-
-int main()
-{
-        ofstream fichier("test.txt", ios::out | ios::trunc);  // ouverture en écriture avec effacement du fichier ouvert
-
-        if(fichier)
-        {
-                string nom = "Xav57";
-                int age = 19;
-                fichier << "Date de naissance : " << 24 << '/' << 3 << '/' << 1988 << endl;
-                fichier << "Bonjour, " << nom << ". Vous avez " << age << " ans.";
-
-                fichier.close();
-        }
-        else
-                cerr << "Impossible d'ouvrir le fichier !" << endl;
-
-        return 0;
-}
-
- */
