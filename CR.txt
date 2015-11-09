@@ -43,3 +43,7 @@ int generateTest3();
 generates entries for 50 sensors but in bigger time intervals and multiple traffics. Calls the 3 different queries with several parameters. Used o check that the program computes datas properly.
 int generateTest4();
 generates some entries to test basically if the last query works with some missing values. Fast to check.
+int generateTest5();
+Our biggest test. ~20M events on 1500 sensors. To compare with outputs from other groups. Sensor numbers between 0 and 1G
+
+Moreover, we used some manually wrote tests to try to check all special conditions for our queries.
