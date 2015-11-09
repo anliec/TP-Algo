@@ -13,6 +13,7 @@ for i in `seq 1 $NumberOfInput`
 do
 	INPUT=$( echo $inputList | awk "{ print \$$i }")
 	REF_OUTPUT=$( echo $outputList | awk "{ print \$$i }")
+	OUTPUT=test/output$i
 
 	echo ""
 	echo "======================================="
