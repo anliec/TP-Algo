@@ -97,22 +97,46 @@ int addData(const char &trafic,const uint &min,const uint &hours,\
 	const uint &id,const uint &day7);
 \end{lstlisting}
 \paragraph{}
-	method used to increment corresponding cells of all arrays. Complexity: O(1)
+	Method used to increment corresponding cells of all arrays. Complexity: O(1).
 \paragraph{Contract}
 	The values given must be ritghtly build: min shoult be between 0 and 59, hours between 0 and 23 and day7 between 0, for monday, and 6, for sunday. To work properly trafic must be set to one of: 'V','J','R','N'.
+	
 \begin{lstlisting}
 int sensorStats(usint id);
 \end{lstlisting}
-prints a sensor statistics using the array sensors.
+\paragraph{}
+	Prints a sensor statistics using the array sensors. Complexity: O(1).
+\paragraph{Contract}
+	The id given in parameter must corespond to a sensors with an already added id else the stats will use the first added sensor.
+
 \begin{lstlisting}
 int jamStats(uchar day7);
 \end{lstlisting}
-prints jam statistics by hour using the array daysAndHours.
+\paragraph{}
+	Prints jam statistics by hour using the array daysAndHours. Complexity: O(1).
+\paragraph{Contract}
+	day7 must be between 0 and 6 $(NUMBER_OF_DAYS-1)$.
+
 \begin{lstlisting}
 int dayStats(uchar day7);
 \end{lstlisting}
-prints a week day statistics using the array days.
+\paragraph{}
+	Prints a week day statistics using the array days. Complexity: O(1).
+\paragraph{Contract}
+	day7 must be between 0 and 6 $(NUMBER_OF_DAYS-1)$.
+	
+\begin{lstlisting}
+int optimum(uchar day7, uint begginHours, uint endHours,\
+		uint idTab[], uint tabSize);
+\end{lstlisting}
+\paragraph{}
+	
+\paragraph{Contract}
 
 
 \end{document}
+
+
+
+
 
