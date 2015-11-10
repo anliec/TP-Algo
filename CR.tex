@@ -7,6 +7,7 @@
 \usepackage[francais]{babel}
 \usepackage{textcomp}
 \usepackage{listings}
+\lstset{language=C++} 
 
 %\usepackage{hyperref} %pour les liens internet
 
@@ -41,16 +42,76 @@
 \paragraph{}
 Our application must support 20 million events from 1500 sensors. Consequently, we chose not to store event themselves as they arrive. However, at the launch of our program, several static arrays of entire values are created. Their indexes correspond to the information used to anwer to the user querries, for instance the sensor number, the hour,etc. Their last dimension corresponds to a sensor color. So when an event is added, we just increment one cell in each array.
 
-\section{Class}
+\section{Classes}
 
 \subsection{DataHandler}
 \paragraph{}
 All data additions and request are managed by the class DataHandler which contain itself the 4 data arrays.
 
+\subsubsection{Constants}
+
+\paragraph{}
+	This class use differents constants, first there are one error code used when the trafic char is not one of the four expected: 'V','J','R','N'
+
+\begin{lstlisting}
+const unsigned int ERROR_INVALID_TRAFIC_UCHAR = 201;
+\end{lstlisting}
+
+\paragraph{}
+	DataHandler also use constants to define the size of the arrays used to store all the datas.
+
+\begin{lstlisting}
+const int NUMBER_OF_COLORS = 4;
+const int NUMBER_OF_SENSORS = 1500;
+const int NUMBER_OF_MINUTES = 1440;
+const int NUMBER_OF_HOURS = 24;
+const int NUMBER_OF_DAYS = 7;
+\end{lstlisting}
+
 \subsubsection{Atributs}
+\paragraph{}
+	To make our code more readable we decided to use the following type def in the DataHandler Class.
+\begin{lstlisting}
+typedef unsigned int uint;
+\end{lstlisting}
+
+\paragraph{}
+	The argument used in this class are the following:
+\begin{lstlisting}
+IdHash idHash;
+uint sensors[NUMBER_OF_SENSORS][NUMBER_OF_COLORS];
+uint days[NUMBER_OF_DAYS][NUMBER_OF_COLORS];
+uint daysAndHours[NUMBER_OF_DAYS][NUMBER_OF_HOURS][NUMBER_OF_COLORS];
+unsigned char *daysAndMin[NUMBER_OF_DAYS][NUMBER_OF_MINUTES][NUMBER_OF_COLORS];
+\end{lstlisting}
+
+\paragraph{}
+	idHash is an instance of our IdHash class, which is detailled latter. It's an hash tab that we use to link the sensors id and the position in our static tabs.
+	sensors, days, daysAndHours and daysAndMin are four static array used to store statistics which will be used in our stats methods. The fourth array is a four dimantion one with the last one, coreponding to the sensors id, is alocated using a new in the construtor.
 
 \subsubsection{Public Methods}
 
+\begin{lstlisting}
+int addData(const Data &data);
+int addData(const char &trafic,const uint &min,const uint &hours,\
+	const uint &id,const uint &day7);
+\end{lstlisting}
+\paragraph{}
+	method used to increment corresponding cells of all arrays. Complexity: O(1)
+\paragraph{Contract}
+	The values given must be ritghtly build: min shoult be between 0 and 59, hours between 0 and 23 and day7 between 0, for monday, and 6, for sunday. To work properly trafic must be set to one of: 'V','J','R','N'.
+\begin{lstlisting}
+int sensorStats(usint id);
+\end{lstlisting}
+prints a sensor statistics using the array sensors.
+\begin{lstlisting}
+int jamStats(uchar day7);
+\end{lstlisting}
+prints jam statistics by hour using the array daysAndHours.
+\begin{lstlisting}
+int dayStats(uchar day7);
+\end{lstlisting}
+prints a week day statistics using the array days.
 
 
 \end{document}

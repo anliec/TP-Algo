@@ -14,7 +14,6 @@ int main()
 
     bool loop= true;
     std::string entry;
-    //char c_entry[20]; //using scanf is a bit slower than cin for string...
     //variable used in the while loop:
     uint id, hours, min, weekDay,year,month,day;
     char trafic;
@@ -22,7 +21,6 @@ int main()
     while(loop && !std::cin.eof())
     {
         std::cin >> entry;
-        //scanf("%19s",c_entry);
         // input example: ADD 400 2015 11 02 14 08 1 N
         if(entry.substr(0,3).compare("ADD")==0)
         {
