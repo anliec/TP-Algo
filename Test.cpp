@@ -275,7 +275,7 @@ int generateTest5()
     else
     {
         srand ( time(NULL) );
-        int sensors[1500];
+        unsigned int sensors[1500];
         randSensList(sensors, 1500);
         for(int sensorIndex =0; sensorIndex<1500; sensorIndex++)
         {
@@ -324,14 +324,14 @@ int generateTest5()
         inFile << "\r\n";
         inFile << "EXIT\r\n";
         cout << "generated 5!" <<endl;
-    }
+        }
 }
 
-int randSensList(int* sensors, int size)
+int randSensList(unsigned int* sensors, int size)
 {
-    for (int t=0;t<1500;t++)
+    for (int t=0;t<size;t++)
     {
-        int random;
+        unsigned int random;
         bool newNumber=false;
         while (newNumber==false)
         {
