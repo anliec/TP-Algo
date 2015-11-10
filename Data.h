@@ -25,7 +25,7 @@ public:
     uchar getWeekDay() const;
     char getTrafic() const;
 
-    Data(usint &id,usint &year,uchar &month,uchar &dayNumber,uchar &hours,uchar &min,uchar &weekDay,char &trafic);
+    Data(usint &id,usint &year,uchar &month,uchar &dayNumber,uchar &hours,uchar &min,uchar &weekDay,char &traffic);
     Data();
 
 private:
@@ -36,7 +36,7 @@ private:
     uchar m_hours;
     uchar m_min;
     uchar m_weekDay;
-    char m_trafic;
+    char m_traffic;
 };
 
 

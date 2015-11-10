@@ -16,7 +16,7 @@ int main()
     std::string entry;
     //variable used in the while loop:
     uint id, hours, min, weekDay,year,month,day;
-    char trafic;
+    char traffic;
 
     while(loop && !std::cin.eof())
     {
@@ -24,8 +24,8 @@ int main()
         // input example: ADD 400 2015 11 02 14 08 1 N
         if(entry.substr(0,3).compare("ADD")==0)
         {
-            std::cin >> id >> year >> month >> day >> hours >> min >> weekDay >> trafic;
-            handler.addData(trafic,min,hours,id,weekDay-1);
+            std::cin >> id >> year >> month >> day >> hours >> min >> weekDay >> traffic;
+            handler.addData(traffic,min,hours,id,weekDay-1);
         }
         else if(entry.substr(0,7).compare("STATS_C")==0)
         {

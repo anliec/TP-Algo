@@ -9,7 +9,7 @@ All data additions and request are managed by the class DataHandler which contai
 
 public methods :
 int addData(const Data &data);
-int addData(const char &trafic,const uint &min,const uint &hours,const uint &id,const uint &day7);
+int addData(const char &traffic,const uint &min,const uint &hours,const uint &id,const uint &day7);
 method used to increment corresponding cells of all arrays.
 int sensorStats(usint id);
 prints a sensor statistics using the private array uint sensors[NUMBER_OF_SENSORS][NUMBER_OF_COLORS];

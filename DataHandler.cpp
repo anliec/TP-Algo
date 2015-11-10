@@ -66,10 +66,10 @@ int DataHandler::addData(const Data &data)
 {
     return addData(data.getTrafic(),data.getMin(),data.getHours(),data.getId(),data.getWeekDay());
 }
-int DataHandler::addData(const char &trafic,const uint &min,const uint &hours,const uint &id,const uint &day7)
+int DataHandler::addData(const char &traffic,const uint &min,const uint &hours,const uint &id,const uint &day7)
 {
     uint color;
-    switch(trafic)
+    switch(traffic)
     {
         case 'V' :
             color =0;

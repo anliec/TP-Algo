@@ -36,13 +36,17 @@ class DataHandler {
 //Public methods
 public:
     int addData(const Data &data);
-    int addData(const char &trafic,const uint &min,const uint &hours,const uint &id,const uint &day7);
+    int addData(const char &traffic,const uint &min,const uint &hours,const uint &id,const uint &day7);
     /* parameters : useful information sent by the user in an ADD request
      * update member arrays in corresponding cells
+     * contract :
+     * hours between 0 and 23, min between 0 and 59, hours between 0 and 23 and day7 between 0, for monday, and 6.
+     * To work properly traffic must be set to one of: 'V','J','R','N'.
      */
 
     int sensorStats(usint id);
     /* prints the sensor statistics for the id given in parameter
+     * contract
      */
 
     int jamStats(uchar day7);

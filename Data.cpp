@@ -4,15 +4,15 @@
 
 #include "Data.h"
 
-Data::Data(usint &id,usint &year,uchar &month,uchar &dayNumber,uchar &hours,uchar &min,uchar &weekDay,char &trafic):\
+Data::Data(usint &id,usint &year,uchar &month,uchar &dayNumber,uchar &hours,uchar &min,uchar &weekDay,char &traffic):\
     m_id(id), m_year(year), m_month(month), m_dayNumber(dayNumber), m_hours(hours), m_min(min), m_weekDay(weekDay),
-    m_trafic(trafic)
+    m_traffic(traffic)
 {
 
 }
 
 Data::Data():\
-    m_id(0),m_year(0),m_month(0),m_dayNumber(0),m_hours(0),m_min(0),m_weekDay(0),m_trafic(0)
+    m_id(0),m_year(0),m_month(0),m_dayNumber(0),m_hours(0),m_min(0),m_weekDay(0),m_traffic(0)
 {
 
 }
@@ -47,6 +47,6 @@ uchar Data::getWeekDay() const {
 }
 
 char Data::getTrafic() const {
-    return m_trafic;
+    return m_traffic;
 }
 
