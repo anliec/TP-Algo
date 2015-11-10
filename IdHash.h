@@ -19,10 +19,14 @@ public:
     ~IdHash();
 
     unsigned addId(const unsigned & id);
-    /* add the id to the hash table if not already in
+    /* add the user id to the hash table if not already in
+     * returns : an array position used by the program
      */
 
     unsigned getTabId(const unsigned & id) const;
+    /* parameter : a sensor id called by the the user
+     * returns : an array position used by the program
+     */
 
 private:
     unsigned hashFunction(const unsigned & id) const;

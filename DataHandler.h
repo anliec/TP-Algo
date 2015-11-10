@@ -37,11 +37,27 @@ class DataHandler {
 public:
     int addData(const Data &data);
     int addData(const char &trafic,const uint &min,const uint &hours,const uint &id,const uint &day7);
+    /* parameters : useful information sent by the user in an ADD request
+     * update member arrays in corresponding cells
+     */
+
     int sensorStats(usint id);
+    /* prints the sensor statistics for the id given in parameter
+     */
+
     int jamStats(uchar day7);
+    /* prints jam statistics for the day given in parameter
+     */
+
     int dayStats(uchar day7);
+    /* print a week day statistics for the day given in parameter
+     */
+
 #ifdef OPT
     int optimum(uchar day7, uint begginHours, uint endHours, uint idTab[], uint tabSize);
+    /*
+     *
+     */
 #endif
     DataHandler();
     ~DataHandler();
