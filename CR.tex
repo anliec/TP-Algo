@@ -1,0 +1,57 @@
+\documentclass[a4paper, 12pts]{article}
+
+\usepackage[top=3.5cm, bottom=3.5cm, left=3cm, right=3cm]{geometry}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage{textcomp}
+\usepackage{listings}
+
+%\usepackage{hyperref} %pour les liens internet
+
+%\usepackage{graphicx} %pour les images
+\title{TP: ................}
+\author{B3111: Edern HAUMONT et Nicolas SIX}
+\date{Mercredi 11 novembre 2015}
+
+%-----------------------------------------------------------------------------------------
+
+
+\begin{document}
+
+\begin{titlepage}
+
+\maketitle
+
+\end{titlepage}
+
+%----------------------------------------------Title end
+
+\tableofcontents
+
+\pagebreak
+
+%----------------------------------------------table of contents end
+
+\section{Introduction}
+\paragraph{}
+
+\subsection{Choice of the data structure}
+\paragraph{}
+Our application must support 20 million events from 1500 sensors. Consequently, we chose not to store event themselves as they arrive. However, at the launch of our program, several static arrays of entire values are created. Their indexes correspond to the information used to anwer to the user querries, for instance the sensor number, the hour,etc. Their last dimension corresponds to a sensor color. So when an event is added, we just increment one cell in each array.
+
+\section{Class}
+
+\subsection{DataHandler}
+\paragraph{}
+All data additions and request are managed by the class DataHandler which contain itself the 4 data arrays.
+
+\subsubsection{Atributs}
+
+\subsubsection{Public Methods}
+
+
+
+\end{document}
+
