@@ -14,7 +14,7 @@ int generateTest3();
 int generateTest4();
 int generateTest5();
 
-int randSensList(int * sensors, int size);
+int randSensList(unsigned int * sensors, int size);
 int randDay7();
 int randState();
 int randHour();
