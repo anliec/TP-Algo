@@ -51,19 +51,19 @@ public:
     int sensorStats(uint id) const;
     /* prints the sensor statistics for the id given in parameter
      * contract : id in unsigned int range
-     * returns null stats if 0 corresponding event
+     * prints null stats if 0 corresponding event
      */
 
     int jamStats(uchar day7) const;
     /* prints jam statistics for the day given in parameter
      * contract : day7 between 0 and 6
-     * returns null stats if 0 corresponding event
+     * prints null stats if 0 corresponding event
      */
 
     int dayStats(uchar day7) const;
     /* prints a week day statistics for the day given in parameter
      * contract : day7 between 0 and 6
-     * returns null stats if 0 corresponding event
+     * prints null stats if 0 corresponding event
      */
 
 #ifdef OPT
@@ -71,7 +71,8 @@ public:
     /* optimum look for the best departure time in a given interval
      * contract : day7 must be between 0 and 6
      * beginHours and endHours must be between 0 and 23 with beginHours smaller than endHours
-     * idTab must be an array of size tabSize filled with already added sensors id (if an id is not added the first added sensors will be used)
+     * idTab must be an array of size tabSize filled with already added sensors id (if an id
+     * is not added the first added sensors will be used)
      */
 #endif
 
