@@ -8,7 +8,12 @@
 //---------- Realisation of the class IdHash (file IdHash.cpp) --
 #include "IdHash.h"
 
+//----------------------------------------------------------------- PUBLIC
+
+// public methods
 IdHash::IdHash()
+/* Algorithm : initializes sizeOfHashList values and set lastIdInTab to 0;
+ */
 {
     for (int i = 0; i < SIZE_OF_HASHTABLE; i++)
     {
@@ -20,6 +25,8 @@ IdHash::IdHash()
 
 IdHash::~IdHash()
 {
+/* Algorithm : deletes dynamically allocated elements (hashTable)
+ */
     for (int i = 0; i < SIZE_OF_HASHTABLE; i++)
     {
         if(sizeOfHashList[i][1]!=0)
@@ -31,6 +38,8 @@ IdHash::~IdHash()
 }
 
 unsigned IdHash::addId(const unsigned &id)
+/* checks if the id already exists.
+ */
 {
     unsigned idInTab, pos=hashFunction(id);
     if(alreadyAdded(id,pos,idInTab))

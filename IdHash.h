@@ -10,11 +10,11 @@
 #define TP_ALGO_IDHASH_H
 
 
-#define SIZE_OF_HASHTABLE 1000
+const int SIZE_OF_HASHTABLE = 1000;
 //hash function parameters
-#define PRIME_NUMBER 2999
-#define A 1
-#define B 0
+const int PRIME_NUMBER = 2999;
+const int A = 1;
+const int B = 0;
 
 //------------------------------------------------------------------------
 // This class makes the link between a sensor id of the user and indexes in data tables
@@ -26,10 +26,6 @@ class IdHash
 
 //----------------------------------------------------------------- PUBLIC
 public:
-//constructor - destructor
-    IdHash();
-    ~IdHash();
-
 //public methods
     unsigned addId(const unsigned & id);
     /* add the user id to the hash table if not already in
@@ -43,18 +39,25 @@ public:
      * contract : id in unsigned int range
      */
 
+//constructor - destructor
+    IdHash();
+    ~IdHash();
+
+//------------------------------------------------------------------ PRIVATE
+// private methods
 private:
     unsigned hashFunction(const unsigned & id) const;
     unsigned insertAt(const unsigned & pos, const unsigned & id); //return the tab id
     unsigned readAt(const unsigned & pos, const unsigned &id) const;
     bool alreadyAdded(const unsigned & id, const unsigned pos, unsigned & retToTabId) const;
 
+//private attributes
 private:
     unsigned * hashTable[SIZE_OF_HASHTABLE][2]; // 0: id // 1: id in tabs
     unsigned sizeOfHashList[SIZE_OF_HASHTABLE][2];// 0: used size // 1:usable size
     unsigned lastIdInTab;
 
-};
+}; // class IdHash
 
 
 #endif //TP_ALGO_IDHASH_H

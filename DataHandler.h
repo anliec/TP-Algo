@@ -10,12 +10,12 @@
 #define TP_ALGO_DATAHANDLER_H
 
 //INCLUDE
-//include system
+//system include
 #include <iostream>
-
+//personal include
 #include "IdHash.h"
 
-//uncomment to use optimum function:
+//comment to deactivate optimum function:
 #define OPT
 
 const unsigned int ERROR_INVALID_TRAFIC_UCHAR = 201;
@@ -27,12 +27,15 @@ const int NUMBER_OF_HOURS = 24;
 const int NUMBER_OF_DAYS = 7;
 
 typedef unsigned int uint;
+typedef unsigned short int usint;
+typedef unsigned char uchar;
 
 //------------------------------------------------------------------------
 // This class manages all data of the applications
 // It contains all useful information and answers to statistic queries
 //------------------------------------------------------------------------
 class DataHandler {
+//----------------------------------------------------------------- PUBLIC
 
 //Public methods
 public:
@@ -44,28 +47,35 @@ public:
      * To work properly traffic must be set to one of: 'V','J','R','N'.
      */
 
-    int sensorStats(usint id);
+    int sensorStats(uint id);
     /* prints the sensor statistics for the id given in parameter
-     * contract
+     * contract : id in unsigned int range
      */
 
     int jamStats(uchar day7);
     /* prints jam statistics for the day given in parameter
+     * contract : day7 between 0 and 6
      */
 
     int dayStats(uchar day7);
-    /* print a week day statistics for the day given in parameter
+    /* prints a week day statistics for the day given in parameter
+     * contract : day7 between 0 and 6
      */
 
 #ifdef OPT
-    int optimum(uchar day7, uint begginHours, uint endHours, uint idTab[], uint tabSize);
-    /*
-     *
+    int optimum(uchar day7, uint beginHours, uint endHours, uint idTab[], uint tabSize);
+    /* optimum look for the best departure time in a given interval
+     * contract : day7 must be between 0 and 6
+     * beginHours and endHours must be between 0 and 23 with beginHours smaller than endHours
+     * idTab must be an array of size tabSize filled with already added sensors id (if an id is not added the first added sensors will be used)
      */
 #endif
+
+// constructor - destructor
     DataHandler();
     ~DataHandler();
 
+//------------------------------------------------------------------ PRIVATE
 //Private methods
 private:
 #ifdef OPT

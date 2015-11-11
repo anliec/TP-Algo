@@ -66,10 +66,6 @@ DataHandler::~DataHandler()
     }
 }
 
-int DataHandler::addData(const Data &data)
-{
-    return addData(data.getTrafic(),data.getMin(),data.getHours(),data.getId(),data.getWeekDay());
-}
 int DataHandler::addData(const char &traffic,const uint &min,const uint &hours,const uint &id,const uint &day7)
 {
     uint color;
@@ -102,7 +98,7 @@ int DataHandler::addData(const char &traffic,const uint &min,const uint &hours,c
     return 0;
 }
 
-int DataHandler::sensorStats(usint id)
+int DataHandler::sensorStats(uint id)
 {
     uint idInTab = idHash.getTabId(id);
     int total = sensors[idInTab][0]+sensors[idInTab][1]+sensors[idInTab][2]+sensors[idInTab][3];
@@ -175,7 +171,7 @@ int DataHandler::jamStats(uchar day7)
     return 0;
 }
 #ifdef OPT
-int DataHandler::optimum(uchar day7, uint begginHours, uint endHours, uint idTab[], uint tabSize)
+int DataHandler::optimum(uchar day7, uint beginHours, uint endHours, uint idTab[], uint tabSize)
 {
     //convertion of the id tab to daysAndMin usable value;
     unsigned idsInTab[tabSize];
@@ -184,9 +180,9 @@ int DataHandler::optimum(uchar day7, uint begginHours, uint endHours, uint idTab
         idsInTab[i] = idHash.getTabId(idTab[i]);
     }
 
-    uint bestTime=1440, currentTime=1440, leavingMin=begginHours;
+    uint bestTime=1440, currentTime=1440, leavingMin=beginHours;
     uint endMin = endHours*60;
-    for(uint currentMin=begginHours*60 ; currentMin < endMin ; currentMin++)
+    for(uint currentMin=beginHours*60 ; currentMin < endMin ; currentMin++)
     {
         currentTime = computeTime(day7,currentMin,idsInTab,tabSize,bestTime);
         if(currentTime < bestTime)
