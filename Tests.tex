@@ -1,0 +1,51 @@
+%==================================================================================================
+%                                     Section: tests
+%==================================================================================================
+\section{tests}
+
+\paragraph{Introduction}
+We used a few manually generated test and we generated some bigger input files with a generation code.
+This script also ofently generates an expected output file.
+
+To test or application, we made it read th input file instead of the keyboard input. We also redirect the application output to another file which is afterwards compared to the expected output file.
+
+\subsection{manually generated tests}
+
+\subsubsection{TestAdd}
+\paragraph
+The first test just check that the ADD query runs fine. We add several event and check each time the state of the table with STATS_C.
+
+\subsubsection{TestAddStatC and TestStatC}
+\paragraph
+These tests check the comportment of the STATS_C query, especially with no values, one value, and after several ADD.
+
+\subsubsection{TestStatD7}
+\paragraph
+This test checks the comportment of the STATS_D7 query, especially with no values, one value, and after several ADD.
+
+\subsubsection{TestJamDH}
+\paragraph
+This test checks the comportment of the JAM_DH query, especially with no values, full jam values and multiple values.
+
+\subsubsection{TestOpt}
+\paragrap
+This test checks the comportment of the OPT query. We made this request with 0 sensors, sensors with no value, 1 and 2 sensors.
+
+
+\subsection{machine generated tests}
+
+\subsubsection{Test2}
+\paragrap
+The code generates entries (all are green) for 1500 sensors and a restricted time interval. Calls JAM_DH query to test input values. Used to check that the program runs.
+
+\subsubsection{Test3}
+\paragrap
+The code generates entries for 50 sensors but in bigger time intervals and multiple traffics. Calls the 3 different queries with several parameters. Used o check that the program computes datas properly.
+
+\subsubsection{Test4}
+\paragrap
+The code generates some entries to test basically if the last query works with some missing values. Fast to check.
+
+\subsubsection{Test5}
+\paragrap
+Our biggest test. ~20M events on 1500 sensors. To compare with outputs from other groups. Sensor numbers between 0 and 1G
