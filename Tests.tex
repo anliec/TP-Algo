@@ -7,13 +7,18 @@
 We used a few manually generated test and we generated some bigger input files with a generation code.
 This script also ofently generates an expected output file.
 
-To test or application, we made it read th input file instead of the keyboard input. We also redirect the application output to another file which is afterwards compared to the expected output file.
+To test our application, we made it read the input file instead of the keyboard input. We also redirect the application output to another file which is afterwards compared to the expected output file.
+
+\paragraph{script.sh}
+We made a script which reads all .in files in the test directory. It runs them and compares their ouputs with the .out files of the same name.
+All differences are printed on two colums and for each test a lot of execution information are printed such as execution time, CPU an memory usage, etc.
+
 
 \subsection{manually generated tests}
 
 \subsubsection{TestAdd}
 \paragraph{}
-The first test just check that the ADD query runs fine. We add several event and check each time the state of the table with STATS\_C.
+The first test just checks that the ADD query runs fine. We add several event and check each time the state of the table with STATS\_C.
 
 \subsubsection{TestAddStatC and TestStatC}
 \paragraph{}
