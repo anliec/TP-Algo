@@ -51,7 +51,7 @@ All data additions and request are managed by the class DataHandler which contai
 \subsubsection{Constants}
 
 \paragraph{}
-	This class use differents constants, first there are one error code used when the traffic char is not one of the four expected: 'V','J','R','N'
+	This class use differents constants, first there are one error code used when the trafic char is not one of the four expected: 'V','J','R','N'
 
 \begin{lstlisting}
 const unsigned int ERROR_INVALID_TRAFIC_UCHAR = 201;
@@ -93,26 +93,50 @@ unsigned char *daysAndMin[NUMBER_OF_DAYS][NUMBER_OF_MINUTES][NUMBER_OF_COLORS];
 
 \begin{lstlisting}
 int addData(const Data &data);
-int addData(const char &traffic,const uint &min,const uint &hours,\
+int addData(const char &trafic,const uint &min,const uint &hours,\
 	const uint &id,const uint &day7);
 \end{lstlisting}
 \paragraph{}
-	method used to increment corresponding cells of all arrays. Complexity: O(1)
+	Method used to increment corresponding cells of all arrays. Complexity: O(1).
 \paragraph{Contract}
-	The values given must be ritghtly build: min shoult be between 0 and 59, hours between 0 and 23 and day7 between 0, for monday, and 6, for sunday. To work properly traffic must be set to one of: 'V','J','R','N'.
+	The values given must be ritghtly build: min shoult be between 0 and 59, hours between 0 and 23 and day7 between 0, for monday, and 6, for sunday. To work properly trafic must be set to one of: 'V','J','R','N'.
+	
 \begin{lstlisting}
 int sensorStats(usint id);
 \end{lstlisting}
-prints a sensor statistics using the array sensors.
+\paragraph{}
+	Prints a sensor statistics using the array sensors. Complexity: O(1).
+\paragraph{Contract}
+	The id given in parameter must corespond to a sensors with an already added id else the stats will use the first added sensor.
+
 \begin{lstlisting}
 int jamStats(uchar day7);
 \end{lstlisting}
-prints jam statistics by hour using the array daysAndHours.
+\paragraph{}
+	Prints jam statistics by hour using the array daysAndHours. Complexity: O(1).
+\paragraph{Contract}
+	day7 must be between 0 and 6 $(NUMBER_OF_DAYS-1)$.
+
 \begin{lstlisting}
 int dayStats(uchar day7);
 \end{lstlisting}
-prints a week day statistics using the array days.
+\paragraph{}
+	Prints a week day statistics using the array days. Complexity: O(1).
+\paragraph{Contract}
+	day7 must be between 0 and 6 $(NUMBER_OF_DAYS-1)$.
+	
+\begin{lstlisting}
+int optimum(uchar day7, uint begginHours, uint endHours,\
+		uint idTab[], uint tabSize);
+\end{lstlisting}
+\paragraph{}
+	
+\paragraph{Contract}
 
 
 \end{document}
+
+
+
+
 
