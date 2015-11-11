@@ -97,7 +97,7 @@ typedef unsigned int uint;
 \end{lstlisting}
 
 \paragraph{}
-	The argument used in this class are the following:
+	The atributs used in this class are the following:
 \begin{lstlisting}
 IdHash idHash;
 uint sensors[NUMBER_OF_SENSORS][NUMBER_OF_COLORS];
@@ -120,36 +120,36 @@ unsigned char *daysAndMin[NUMBER_OF_DAYS][NUMBER_OF_MINUTES][NUMBER_OF_COLORS];
 int addData(const char &trafic,const uint &min,const uint &hours,\
 	const uint &id,const uint &day7);
 \end{lstlisting}
-\subparagraph{description:}
-	Method used to increment corresponding cells of all arrays. Complexity: O(1).
-\subparagraph{Contract:}
+\paragraph{description:}
+	Method used to update member arrays in corresponding cells. Complexity: O(1).
+\paragraph{Contract:}
 	The values given must be ritghtly build: min shoult be between 0 and 59, hours between 0 and 23 and day7 between 0, for monday, and 6, for sunday. To work properly trafic must be set to one of: 'V','J','R','N'.
 
 \subsubsubsection{sensorStats}
 \begin{lstlisting}
 int sensorStats(uint id);
 \end{lstlisting}
-\subparagraph{description:}
-	Prints a sensor statistics using the array sensors. Complexity: O(1).
-\subparagraph{Contract:}
-	The id given in parameter must corespond to a sensors with an already added id else the stats will use the first added sensor.
+\paragraph{description:}
+	Prints the sensor statistics for an id. Complexity: O(1).
+\paragraph{Contract:}
+	The id given in parameter must corespond to a sensors with an already added id else the stats will use the first added sensor. Print null stats if 0 corresponding event
 
 \subsubsubsection{jamStats}
 \begin{lstlisting}
 int jamStats(uchar day7);
 \end{lstlisting}
-\subparagraph{description:}
-	Prints jam statistics by hour using the array daysAndHours. Complexity: O(1).
-\subparagraph{Contract:}
-	day7 must be between 0 and 6 $(NUMBER\_OF\_DAYS-1)$.
+\paragraph{description:}
+	prints jam statistics for a day. Complexity: O(1).
+\paragraph{Contract:}
+	day7 must be between 0 and 6 $(NUMBER\_OF\_DAYS-1)$. Print null stats if 0 corresponding event.
 		
 \subsubsubsection{dayStats}
 \begin{lstlisting}
 int dayStats(uchar day7);
 \end{lstlisting}
-\subparagraph{description:}
-	Prints a week day statistics using the array days. Complexity: O(1).
-\subparagraph{Contract:}
+\paragraph{description:}
+	prints a week day statistics for the day. Complexity: O(1).
+\paragraph{Contract:}
 	day7 must be between 0 and 6 $(NUMBER\_OF\_DAYS-1)$.
 		
 \subsubsubsection{optimum}
@@ -157,9 +157,9 @@ int dayStats(uchar day7);
 int optimum(uchar day7, uint begginHours, uint endHours,\
 		uint idTab[], uint tabSize);
 \end{lstlisting}
-\subparagraph{description:}
+\paragraph{description:}
 	optimum look for the best departure time in a given interval. Complexity: $O(tabsize * (endHours-beginHours) )$.
-\subparagraph{Contract:}
+\paragraph{Contract:}
 	day7 must be between 0 and 6 $(NUMBER\_OF\_DAYS-1)$. begginHours and endHours must be between 0 and 23 with begginHours smaller than endHours. idTab must be an array of size tabSize filled with already added sensors' id (if an id is not added the first added sensors will be used).
 	
 	To compute the optimum departure time this methode consider that the time taken to go throuht a sensors is the most probable one at this time of the day acording to the added data. In case of equality on trafic information, the quiker will be used (optimistic).
@@ -194,8 +194,23 @@ const int B = 0;
 %                                  Atributs
 %----------------------------------------------------------------------------------------
 \subsubsection{Atributs}
-\paragraph{}
 
+\paragraph{}
+	The private atributs used in this class are the following:
+\begin{lstlisting}
+unsigned * hashTable[SIZE_OF_HASHTABLE][2];
+unsigned sizeOfHashList[SIZE_OF_HASHTABLE][2];
+unsigned lastIdInTab;
+\end{lstlisting}
+
+\paragraph{}
+    hashTable is an array of two dimentions plus one last dynamic one. The first one is the hash array itself and correspond to the position given by the hash function. The segond one is there to have both the sensors id and the position on the program array. The last dimention is a way to handel case where the hash function give the same position to tow differents id.
+    
+    sizeOfHashList is an two dimentions array created to now the size and the used size of each dynamic part of hashTable.
+    
+    lastIdInTab keep the value of the last added position in order to just have to increment it for the next add.
+    
+    
 %----------------------------------------------------------------------------------------
 %                                  Public Methods
 %----------------------------------------------------------------------------------------
@@ -205,17 +220,17 @@ const int B = 0;
 \begin{lstlisting}
 unsigned addId(const unsigned & id);
 \end{lstlisting}
-\subparagraph{description:}
+\paragraph{description:}
 	add the user id to the hash table if not already in and returns an array position used by the program.
-\subparagraph{Contract:}
+\paragraph{Contract:}
 	id in int range.
 \subsubsubsection{getTabId}
 \begin{lstlisting}
 unsigned getTabId(const unsigned & id) const;
 \end{lstlisting}
-\subparagraph{description:}
+\paragraph{description:}
 	returns the array position used by the program corresponding to a sensor id called by the the user.
-\subparagraph{Contract:}
+\paragraph{Contract:}
 	id in unsigned int range if id is not in the hash tab, return 0.
 	
 %----------------------------------------------------------------------------------------
@@ -224,14 +239,20 @@ unsigned getTabId(const unsigned & id) const;
 \subsubsection{Hash function}
 
 \paragraph{}
-	In order to have a good repartition of our datas on the hash tab we use the clasical $hash(id)=(A*id+B)\%
+	In order to have a good repartition of our datas on the hash tab we use the clasical:
+\begin{equation}
+	hash(id)=(A*id+B)\%PRIME\_NUMBER)\%SIZE\_OF\_HASHTABLE
+\end{equation}	
+	With $A$, $B$, $PRIME\_NUMBER$ and $SIZE\_OF\_HASHTABLE$ the constants defined in the constents section.
+	
+	This function can be improved with random $A$ and $B$ generated at the begining of the execution in order to forgive a data set to always be the worst one.
 
 %==================================================================================================
 %                                     Section: tests
 %==================================================================================================
 \section{tests}
 
-\subsection{
+\subsection{script}
 
 
 \end{document}
