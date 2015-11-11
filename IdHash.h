@@ -10,16 +10,16 @@
 #define TP_ALGO_IDHASH_H
 
 
-const int SIZE_OF_HASHTABLE = 1000;
+const int SIZE_OF_HASHTABLE = 5000;
 //hash function parameters
-const int PRIME_NUMBER = 2999;
+const int PRIME_NUMBER = 7001;
 const int A = 1;
 const int B = 0;
 
 //------------------------------------------------------------------------
 // This class makes the link between a sensor id of the user and indexes in data tables
 // It is a hashTable and its structure is an array
-// It is not designed for more than 5000 ids
+// It is not designed for more than 25000 ids
 //------------------------------------------------------------------------
 class IdHash
 {

@@ -12,7 +12,8 @@
 
 // public methods
 IdHash::IdHash()
-/* Algorithm : initializes sizeOfHashList values and set lastIdInTab to 0;
+/* Constructor
+ * Algorithm : initializes sizeOfHashList values and set lastIdInTab to 0;
  */
 {
     for (int i = 0; i < SIZE_OF_HASHTABLE; i++)
@@ -25,7 +26,8 @@ IdHash::IdHash()
 
 IdHash::~IdHash()
 {
-/* Algorithm : deletes dynamically allocated elements (hashTable)
+/* Destructor
+ * Algorithm : deletes dynamically allocated elements (hashTable)
  */
     for (int i = 0; i < SIZE_OF_HASHTABLE; i++)
     {
@@ -38,7 +40,7 @@ IdHash::~IdHash()
 }
 
 unsigned IdHash::addId(const unsigned &id)
-/* checks if the id already exists.
+/* Algorithm : checks if the id already exists.
  */
 {
     unsigned idInTab, pos=hashFunction(id);
@@ -63,6 +65,9 @@ unsigned IdHash::hashFunction(const unsigned &id) const
 }
 
 unsigned IdHash::insertAt(const unsigned &pos, const unsigned &id)
+/* Algorithm : double hashTable size if it is full.
+ * put requested ids in the hashTable
+ */
 {
     if(sizeOfHashList[pos][0]+1>sizeOfHashList[pos][1])
     {
@@ -95,6 +100,8 @@ unsigned IdHash::insertAt(const unsigned &pos, const unsigned &id)
 }
 
 unsigned IdHash::readAt(const unsigned &pos, const unsigned &id) const
+/* Algorithm : linear search of the element at one position
+ */
 {
     for (int i = 0; i < sizeOfHashList[pos][0]; i++)
     {
@@ -108,6 +115,8 @@ unsigned IdHash::readAt(const unsigned &pos, const unsigned &id) const
 
 bool IdHash::alreadyAdded(const unsigned &id, const unsigned pos, unsigned &retToTabId) const
 {
+/* Algorithm : linear search
+ */
     for (int i = 0; i < sizeOfHashList[pos][0]; ++i) {
         if(hashTable[pos][0][i] == id)
         {

@@ -50,16 +50,19 @@ public:
     int sensorStats(uint id);
     /* prints the sensor statistics for the id given in parameter
      * contract : id in unsigned int range
+     * returns null stats if 0 corresponding event
      */
 
     int jamStats(uchar day7);
     /* prints jam statistics for the day given in parameter
      * contract : day7 between 0 and 6
+     * returns null stats if 0 corresponding event
      */
 
     int dayStats(uchar day7);
     /* prints a week day statistics for the day given in parameter
      * contract : day7 between 0 and 6
+     * returns null stats if 0 corresponding event
      */
 
 #ifdef OPT
