@@ -170,12 +170,25 @@ int optimum(uchar day7, uint begginHours, uint endHours,\
 \subsection{IHash}
 
 \paragraph{}
+This class makes the link between a sensor id of the user and indexes in data tables
+It is a hashTable and its structure is an array.
+It is not designed for more than 25000 ids.
 
 %----------------------------------------------------------------------------------------
 %                                  Constants
 %----------------------------------------------------------------------------------------
 \subsubsection{Constants}
 
+\paragraph{}
+	This Class use differents constants, most of them are related to the hash function.
+
+\begin{lstlisting}
+const int SIZE_OF_HASHTABLE = 5000;
+//hash function parameters
+const int PRIME_NUMBER = 7001;
+const int A = 1;
+const int B = 0;
+\end{lstlisting}
 
 %----------------------------------------------------------------------------------------
 %                                  Atributs
@@ -193,17 +206,25 @@ int optimum(uchar day7, uint begginHours, uint endHours,\
 unsigned addId(const unsigned & id);
 \end{lstlisting}
 \subparagraph{description:}
-	
+	add the user id to the hash table if not already in and returns an array position used by the program.
 \subparagraph{Contract:}
-	
+	id in int range.
 \subsubsubsection{getTabId}
 \begin{lstlisting}
 unsigned getTabId(const unsigned & id) const;
 \end{lstlisting}
 \subparagraph{description:}
-	
+	returns the array position used by the program corresponding to a sensor id called by the the user.
 \subparagraph{Contract:}
+	id in unsigned int range if id is not in the hash tab, return 0.
 	
+%----------------------------------------------------------------------------------------
+%                                  Hash function
+%----------------------------------------------------------------------------------------
+\subsubsection{Hash function}
+
+\paragraph{}
+	In order to have a good repartition of our datas on the hash tab we use the clasical $hash(id)=(A*id+B)\%
 
 %==================================================================================================
 %                                     Section: tests
