@@ -16,6 +16,12 @@
 \author{B3111: Edern HAUMONT et Nicolas SIX}
 \date{Mercredi 11 novembre 2015}
 
+%\renewcommand\subsubsubsection{\@startsection {section}{4}{\z@}%
+%	{-3.5ex \@plus -1ex \@minus -.2ex}%
+%	{2.3ex \ at plus.2ex}%
+%	{\reset@font\Large\bfseries}}
+
+
 %-----------------------------------------------------------------------------------------
 
 
@@ -91,47 +97,56 @@ unsigned char *daysAndMin[NUMBER_OF_DAYS][NUMBER_OF_MINUTES][NUMBER_OF_COLORS];
 
 \subsubsection{Public Methods}
 
-\begin{lstlisting}
+%\subsubsubsection{addData}
+	\begin{lstlisting}
 int addData(const Data &data);
 int addData(const char &trafic,const uint &min,const uint &hours,\
 	const uint &id,const uint &day7);
-\end{lstlisting}
-\paragraph{}
-	Method used to increment corresponding cells of all arrays. Complexity: O(1).
-\paragraph{Contract}
-	The values given must be ritghtly build: min shoult be between 0 and 59, hours between 0 and 23 and day7 between 0, for monday, and 6, for sunday. To work properly trafic must be set to one of: 'V','J','R','N'.
-	
-\begin{lstlisting}
+	\end{lstlisting}
+	\subparagraph{description:}
+		Method used to increment corresponding cells of all arrays. Complexity: O(1).
+	\subparagraph{Contract:}
+		The values given must be ritghtly build: min shoult be between 0 and 59, hours between 0 and 23 and day7 between 0, for monday, and 6, for sunday. To work properly trafic must be set to one of: 'V','J','R','N'.
+
+%\subsubsubsection{sensorStats}
+	\begin{lstlisting}
 int sensorStats(usint id);
-\end{lstlisting}
-\paragraph{}
-	Prints a sensor statistics using the array sensors. Complexity: O(1).
-\paragraph{Contract}
-	The id given in parameter must corespond to a sensors with an already added id else the stats will use the first added sensor.
+	\end{lstlisting}
+	\subparagraph{description:}
+		Prints a sensor statistics using the array sensors. Complexity: O(1).
+	\subparagraph{Contract:}
+		The id given in parameter must corespond to a sensors with an already added id else the stats will use the first added sensor.
 
-\begin{lstlisting}
+%\subsubsubsection{jamStats}
+	\begin{lstlisting}
 int jamStats(uchar day7);
-\end{lstlisting}
-\paragraph{}
-	Prints jam statistics by hour using the array daysAndHours. Complexity: O(1).
-\paragraph{Contract}
-	day7 must be between 0 and 6 $(NUMBER_OF_DAYS-1)$.
-
-\begin{lstlisting}
+	\end{lstlisting}
+	\subparagraph{description:}
+		Prints jam statistics by hour using the array daysAndHours. Complexity: O(1).
+	\subparagraph{Contract:}
+		day7 must be between 0 and 6 $(NUMBER\_OF\_DAYS-1)$.
+		
+%\subsubsubsection{dayStats}
+	\begin{lstlisting}
 int dayStats(uchar day7);
-\end{lstlisting}
-\paragraph{}
-	Prints a week day statistics using the array days. Complexity: O(1).
-\paragraph{Contract}
-	day7 must be between 0 and 6 $(NUMBER_OF_DAYS-1)$.
-	
-\begin{lstlisting}
+	\end{lstlisting}
+	\subparagraph{description:}
+		Prints a week day statistics using the array days. Complexity: O(1).
+	\subparagraph{Contract:}
+		day7 must be between 0 and 6 $(NUMBER\_OF\_DAYS-1)$.
+		
+%\subsubsubsection{optimum}
+	\begin{lstlisting}
 int optimum(uchar day7, uint begginHours, uint endHours,\
 		uint idTab[], uint tabSize);
-\end{lstlisting}
-\paragraph{}
+	\end{lstlisting}
+	\subparagraph{description:}
+		optimum look for the best departure time in a given interval. Complexity: $O(tabsize * (endHours-beginHours) )$.
+	\subparagraph{Contract:}
+		day7 must be between 0 and 6 $(NUMBER\_OF\_DAYS-1)$. begginHours and endHours must be between 0 and 23 with begginHours smaller than endHours. idTab must be an array of size tabSize filled with already added sensors' id (if an id is not added the first added sensors will be used).
 	
-\paragraph{Contract}
+		To compute the optimum departure time this methode consider that the time taken to go throuht a sensors is the most probable one at this time of the day acording to the added data. In case of equality on trafic information, the quiker will be used (optimistic).
+
 
 
 \end{document}
