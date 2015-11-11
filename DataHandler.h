@@ -13,7 +13,6 @@
 //include system
 #include <iostream>
 
-#include "Data.h"
 #include "IdHash.h"
 
 //uncomment to use optimum function:
@@ -37,7 +36,6 @@ class DataHandler {
 
 //Public methods
 public:
-    int addData(const Data &data);
     int addData(const char &traffic,const uint &min,const uint &hours,const uint &id,const uint &day7);
     /* parameters : useful information sent by the user in an ADD request
      * update member arrays in corresponding cells

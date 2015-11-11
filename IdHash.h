@@ -23,18 +23,24 @@
 //------------------------------------------------------------------------
 class IdHash
 {
+
+//----------------------------------------------------------------- PUBLIC
 public:
+//constructor - destructor
     IdHash();
     ~IdHash();
 
+//public methods
     unsigned addId(const unsigned & id);
     /* add the user id to the hash table if not already in
      * returns : an array position used by the program
+     * contract : id in int range
      */
 
     unsigned getTabId(const unsigned & id) const;
     /* parameter : a sensor id called by the the user
      * returns : an array position used by the program
+     * contract : id in unsigned int range
      */
 
 private:
