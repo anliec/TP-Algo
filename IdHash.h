@@ -36,7 +36,8 @@ public:
     unsigned getTabId(const unsigned & id) const;
     /* parameter : a sensor id called by the the user
      * returns : an array position used by the program
-     * contract : id in unsigned int range
+     * contract : id in unsigned int range, if id is not
+     * in the hash tab, return 0.
      */
 
 //constructor - destructor
