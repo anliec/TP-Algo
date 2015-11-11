@@ -127,7 +127,7 @@ int addData(const char &trafic,const uint &min,const uint &hours,\
 
 \subsubsubsection{sensorStats}
 \begin{lstlisting}
-int sensorStats(uint id);
+int sensorStats(uint id) const;
 \end{lstlisting}
 \paragraph{description:}
 	Prints the sensor statistics for an id. Complexity: O(1).
@@ -148,9 +148,9 @@ int jamStats(uchar day7);
 int dayStats(uchar day7);
 \end{lstlisting}
 \paragraph{description:}
-	prints a week day statistics for the day. Complexity: O(1).
+	prints a week day statistics for a given day. Complexity: O(1).
 \paragraph{Contract:}
-	day7 must be between 0 and 6 $(NUMBER\_OF\_DAYS-1)$.
+	day7 must be between 0 and 6 $(NUMBER\_OF\_DAYS-1)$. Print null stats if 0 corresponding event
 		
 \subsubsubsection{optimum}
 \begin{lstlisting}
@@ -167,7 +167,7 @@ int optimum(uchar day7, uint begginHours, uint endHours,\
 %<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 %                                   IdHash
 %<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-\subsection{IHash}
+\subsection{IdHash}
 
 \paragraph{}
 This class makes the link between a sensor id of the user and indexes in data tables
@@ -202,8 +202,7 @@ unsigned * hashTable[SIZE_OF_HASHTABLE][2];
 unsigned sizeOfHashList[SIZE_OF_HASHTABLE][2];
 unsigned lastIdInTab;
 \end{lstlisting}
-
-\paragraph{}
+\paragraph{}	
     hashTable is an array of two dimentions plus one last dynamic one. The first one is the hash array itself and correspond to the position given by the hash function. The segond one is there to have both the sensors id and the position on the program array. The last dimention is a way to handel case where the hash function give the same position to tow differents id.
     
     sizeOfHashList is an two dimentions array created to now the size and the used size of each dynamic part of hashTable.
@@ -250,9 +249,7 @@ unsigned getTabId(const unsigned & id) const;
 %==================================================================================================
 %                                     Section: tests
 %==================================================================================================
-\section{tests}
-
-\subsection{script}
+\input{Tests.tex}
 
 
 \end{document}
