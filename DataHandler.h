@@ -9,6 +9,8 @@
 #ifndef TP_ALGO_DATAHANDLER_H
 #define TP_ALGO_DATAHANDLER_H
 
+//INCLUDE
+//include system
 #include <iostream>
 
 #include "Data.h"
@@ -28,8 +30,8 @@ const int NUMBER_OF_DAYS = 7;
 typedef unsigned int uint;
 
 //------------------------------------------------------------------------
-// what is this class useful for ?
-//
+// This class manages all data of the applications
+// It contains all useful information and answers to statistic queries
 //------------------------------------------------------------------------
 class DataHandler {
 

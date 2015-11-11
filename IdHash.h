@@ -1,7 +1,11 @@
-//
-// Created by nicolas on 07/11/15.
-//
+/*************************************************************************
+                           IdHash  -  description
+                             -------------------
+    begin                : 25/10/2015
+    copyright            : (C) 2015 by Edern Haumont & Nicolas Six
+*************************************************************************/
 
+//---------- Interface of the class IdHash (file IdHash.h) ------
 #ifndef TP_ALGO_IDHASH_H
 #define TP_ALGO_IDHASH_H
 
@@ -12,6 +16,11 @@
 #define A 1
 #define B 0
 
+//------------------------------------------------------------------------
+// This class makes the link between a sensor id of the user and indexes in data tables
+// It is a hashTable and its structure is an array
+// It is not designed for more than 5000 ids
+//------------------------------------------------------------------------
 class IdHash
 {
 public:

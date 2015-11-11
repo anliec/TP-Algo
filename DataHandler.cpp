@@ -1,7 +1,11 @@
-//
-// Created by Edern Haumont on 19/10/2015.
-//
+/*************************************************************************
+                           DataHandler  -  description
+                             -------------------
+    debut                : 25/10/2015
+    copyright            : (C) 2015 by Edern Haumont & Nicolas Six
+*************************************************************************/
 
+//---------- Realisation of the class DataHandler (file DataHandler.cpp) --
 #include "DataHandler.h"
 
 DataHandler::DataHandler()

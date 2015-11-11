@@ -1,8 +1,11 @@
-//
-// Created by nicolas on 07/11/15.
-//
+/*************************************************************************
+                           IdHash  -  description
+                             -------------------
+    debut                : 05/10/2015
+    copyright            : (C) 2015 by Edern Haumont & Nicolas Six
+*************************************************************************/
 
-#include <sys/types.h>
+//---------- Realisation of the class IdHash (file IdHash.cpp) --
 #include "IdHash.h"
 
 IdHash::IdHash()
