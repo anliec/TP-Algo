@@ -8,7 +8,12 @@
 //---------- Realisation of the class DataHandler (file DataHandler.cpp) --
 #include "DataHandler.h"
 
+//----------------------------------------------------------------- PUBLIC
+
+// public methods
 DataHandler::DataHandler()
+/* Algorithm : fills all arrays with 0
+ */
 {
     for(uint i = 0; i<NUMBER_OF_SENSORS; i++)
     {
@@ -53,6 +58,8 @@ DataHandler::DataHandler()
 }
 
 DataHandler::~DataHandler()
+/* Algorithm : destroy dynamic elements (daysAndMin array)
+ */
 {
     for(uint day = 0; day<NUMBER_OF_DAYS; day++)
     {
@@ -67,6 +74,9 @@ DataHandler::~DataHandler()
 }
 
 int DataHandler::addData(const char &traffic,const uint &min,const uint &hours,const uint &id,const uint &day7)
+/* Algorithm : increment all arrays at the cell corresponding to parameters
+ * add the id in the hash table if necessary and return a number for table use
+ */
 {
     uint color;
     switch(traffic)
@@ -98,7 +108,10 @@ int DataHandler::addData(const char &traffic,const uint &min,const uint &hours,c
     return 0;
 }
 
-int DataHandler::sensorStats(uint id)
+int DataHandler::sensorStats(uint id) const
+/* Algorithm : Gets the array index via the hashTable
+ * calculate each color percentage in sensors Array
+ */
 {
     uint idInTab = idHash.getTabId(id);
     int total = sensors[idInTab][0]+sensors[idInTab][1]+sensors[idInTab][2]+sensors[idInTab][3];
@@ -124,7 +137,10 @@ int DataHandler::sensorStats(uint id)
     return 0;
 }
 
-int DataHandler::dayStats(uchar day7)
+int DataHandler::dayStats(uchar day7) const
+/* Algorithm :
+ * calculate each color percentage in days Array
+ */
 {
     int total = days[day7][0]+days[day7][1]+days[day7][2]+days[day7][3];
     int V,J,R,N;
@@ -148,7 +164,10 @@ int DataHandler::dayStats(uchar day7)
     std::cout << "N " << N << "%\r\n";
     return 0;
 }
-int DataHandler::jamStats(uchar day7)
+int DataHandler::jamStats(uchar day7) const
+/* Algorithm : for each hour divide number of red and black entries by total entries
+ * checks if total = 0
+ */
 {
     int weekDay = day7;
     weekDay++; // increment for display
@@ -171,16 +190,19 @@ int DataHandler::jamStats(uchar day7)
     return 0;
 }
 #ifdef OPT
-int DataHandler::optimum(uchar day7, uint beginHours, uint endHours, uint idTab[], uint tabSize)
+int DataHandler::optimum(uchar day7, uint beginHours, uint endHours, uint idTab[], uint tabSize) const
+/* Algorithm : Gets the array index via the hashTable
+ * update best time each time that a better departure hour is found
+ */
 {
-    //convertion of the id tab to daysAndMin usable value;
+    //conversion of the id tab to daysAndMin usable value;
     unsigned idsInTab[tabSize];
     for (int i = 0; i < tabSize; i++)
     {
         idsInTab[i] = idHash.getTabId(idTab[i]);
     }
 
-    uint bestTime=1440, currentTime=1440, leavingMin=beginHours;
+    uint bestTime=1440, currentTime, leavingMin=beginHours;
     uint endMin = endHours*60;
     for(uint currentMin=beginHours*60 ; currentMin < endMin ; currentMin++)
     {
@@ -199,22 +221,26 @@ int DataHandler::optimum(uchar day7, uint beginHours, uint endHours, uint idTab[
     return 0;
 }
 
-uint DataHandler::computeTime(uchar day7, uint leavingMin, uint idsInTab[], uint tabSize, uint currantBestTime)
+uint DataHandler::computeTime(uchar day7, uint leavingMin, uint idsInTab[], uint tabSize, uint currentBestTime) const
+/* Algorithm : computes the duration of a run between multiple sensors
+ * At each moment, if it is more than the current best time returns one day
+ * If the hour is more than 23:59, change the day.
+ */
 {
-    uint currantMin = leavingMin;
-    uint currantDuration = 0;
+    uint currentMin = leavingMin;
+    uint currentDuration = 0;
     for(int i=0 ; i<tabSize ; i++)
     {
-        currantDuration += duration(day7, currantMin, idsInTab[i]);
-        currantMin = currantDuration + leavingMin;
-        if(currantDuration >currantBestTime)
+        currentDuration += duration(day7, currentMin, idsInTab[i]);
+        currentMin = currentDuration + leavingMin;
+        if(currentDuration > currentBestTime)
         {
             return 1440;
         }
         //check for min overflow:
-        if(currantMin > 1440)
+        if(currentMin > 1440)
         {
-            currantMin -= 1440;
+            currentMin -= 1440;
             day7++;
             if(day7>6)
             {
@@ -222,10 +248,14 @@ uint DataHandler::computeTime(uchar day7, uint leavingMin, uint idsInTab[], uint
             }
         }
     }
-    return currantDuration;
+    return currentDuration;
 }
 
-uint DataHandler::duration(uchar day7, uint minuteTime, uint idInTab)
+uint DataHandler::duration(uchar day7, uint minuteTime, uint idInTab) const
+/* Algorithm : To compute the optimum departure time this method consider that the time taken to go through a sensors is
+ * the most probable one at this time of the day according to the added data
+ * In case of equality on traffic information, the quicker will be used (optimistic)
+ */
 {
     uint duration=0;
     uint maxValue=0;

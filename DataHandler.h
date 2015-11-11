@@ -18,6 +18,7 @@
 //comment to deactivate optimum function:
 #define OPT
 
+//Constants
 const unsigned int ERROR_INVALID_TRAFIC_UCHAR = 201;
 
 const int NUMBER_OF_COLORS = 4;
@@ -47,26 +48,26 @@ public:
      * To work properly traffic must be set to one of: 'V','J','R','N'.
      */
 
-    int sensorStats(uint id);
+    int sensorStats(uint id) const;
     /* prints the sensor statistics for the id given in parameter
      * contract : id in unsigned int range
      * returns null stats if 0 corresponding event
      */
 
-    int jamStats(uchar day7);
+    int jamStats(uchar day7) const;
     /* prints jam statistics for the day given in parameter
      * contract : day7 between 0 and 6
      * returns null stats if 0 corresponding event
      */
 
-    int dayStats(uchar day7);
+    int dayStats(uchar day7) const;
     /* prints a week day statistics for the day given in parameter
      * contract : day7 between 0 and 6
      * returns null stats if 0 corresponding event
      */
 
 #ifdef OPT
-    int optimum(uchar day7, uint beginHours, uint endHours, uint idTab[], uint tabSize);
+    int optimum(uchar day7, uint beginHours, uint endHours, uint idTab[], uint tabSize) const;
     /* optimum look for the best departure time in a given interval
      * contract : day7 must be between 0 and 6
      * beginHours and endHours must be between 0 and 23 with beginHours smaller than endHours
@@ -82,8 +83,8 @@ public:
 //Private methods
 private:
 #ifdef OPT
-    uint computeTime(uchar day7, uint leavingMin, uint idsInTab[], uint tabSize, uint currantBestTime = 1440);
-    uint duration(uchar day7, uint minuteTime, uint idInTab);
+    uint computeTime(uchar day7, uint leavingMin, uint idsInTab[], uint tabSize, uint currentBestTime = 1440) const;
+    uint duration(uchar day7, uint minuteTime, uint idInTab) const;
 #endif
 //Private attributes
 private:

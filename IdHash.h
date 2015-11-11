@@ -9,7 +9,7 @@
 #ifndef TP_ALGO_IDHASH_H
 #define TP_ALGO_IDHASH_H
 
-
+// Constants
 const int SIZE_OF_HASHTABLE = 5000;
 //hash function parameters
 const int PRIME_NUMBER = 7001;
